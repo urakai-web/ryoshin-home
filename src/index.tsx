@@ -45,7 +45,7 @@ const WORKS = [
     image: '/static/images/works/ecocute.jpg',
   },
   {
-    title: 'オール浄水器設置工事',
+    title: 'セントラル浄水器設置工事',
     categoryLabel: 'リフォーム事業',
     categorySlugs: ['reform'],
     area: '対応エリア: 大阪府全域',
@@ -83,7 +83,7 @@ function renderHead(title: string, description: string, path: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${description}">
-  <meta name="keywords" content="RYOSHIN,太陽光発電,蓄電池,エコキュート,オール浄水器,住宅リフォーム,外壁塗装,空き家対策,寝屋川市">
+  <meta name="keywords" content="RYOSHIN,太陽光発電,蓄電池,エコキュート,セントラル浄水器,住宅リフォーム,外壁塗装,空き家対策,寝屋川市">
   <meta name="robots" content="index, follow">
   <meta name="author" content="株式会社RYOSHIN">
 
@@ -131,7 +131,7 @@ function renderHead(title: string, description: string, path: string): string {
       "太陽光発電設置工事",
       "蓄電池設置工事",
       "エコキュート設置",
-      "オール浄水器設置",
+      "セントラル浄水器設置",
       "住宅リフォーム",
       "外壁塗装・屋根工事",
       "空き家管理・利活用サポート",
@@ -342,7 +342,7 @@ app.get('/', (c) => {
           <div class="service-card-header">
             <span class="service-label-en">WHOLE-HOUSE PURIFIER</span>
           </div>
-          <h3 class="service-name">オール浄水器</h3>
+          <h3 class="service-name">セントラル浄水器</h3>
           <p class="service-tagline">家中まるごと、いつでも安心なお水を。</p>
           <p class="service-text">1台で家中の蛇口をまるごと浄水するセントラル浄水システム。お子様やペットにも、家中どこでも安心してお水をご利用いただけます。</p>
           <div class="service-card-line"></div>
