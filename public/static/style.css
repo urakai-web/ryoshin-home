@@ -416,6 +416,7 @@ button { cursor: pointer; border: none; background: none; }
   margin-bottom: 24px;
   color: #ffffff;
   text-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  white-space: nowrap;
 }
 
 .hero-title-line {
@@ -528,10 +529,10 @@ button { cursor: pointer; border: none; background: none; }
 
 @media (max-width: 768px) {
   .hero-content { padding: 0 20px; }
+  .hero-title { font-size: clamp(1.8rem, 8vw, 2.5rem); letter-spacing: 0.04em; }
   .hero-data { gap: 24px; flex-wrap: wrap; }
   .hero-data-num { font-size: 1.6rem; }
   .hero-scroll { right: 20px; bottom: 20px; }
-  .hero-coords { left: 20px; bottom: 20px; display: none; }
 }
 
 /* ================================================================

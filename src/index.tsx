@@ -275,8 +275,7 @@ app.get('/', (c) => {
       <div class="hero-text-wrap">
         <p class="hero-label"><span class="hero-label-line"></span>TOTAL LIFE SUPPORT</p>
         <h1 class="hero-title">
-          <span class="hero-title-line" data-delay="0">暮らしを、</span>
-          <span class="hero-title-line" data-delay="1">豊かに。</span>
+          <span class="hero-title-line" data-delay="0">暮らしを豊かに。</span>
         </h1>
         <p class="hero-sub">
           省エネ設備から住宅リフォーム、空き家対策まで。<br>
