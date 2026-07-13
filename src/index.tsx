@@ -134,7 +134,10 @@ function renderHead(title: string, description: string, path: string): string {
       "オール浄水器設置",
       "住宅リフォーム",
       "外壁塗装・屋根工事",
-      "空き家管理・利活用サポート"
+      "空き家管理・利活用サポート",
+      "ガスの切り替え",
+      "携帯電話プランの見直し",
+      "ネット回線の見直し"
     ]
   }
   </script>
@@ -363,6 +366,15 @@ app.get('/', (c) => {
           <p class="service-tagline">眠る資産を、地域の価値へ。</p>
           <p class="service-text">空き家の定期点検・清掃・防犯対策から、賃貸活用やリフォーム後の売却まで。大切な資産を守り、有効活用するお手伝いをします。</p>
           <div class="service-card-line"></div>
+        </div>
+      </div>
+
+      <div class="service-extra">
+        <span class="service-extra-label">その他、生活コストの見直しもサポート</span>
+        <div class="service-extra-list">
+          <span class="service-extra-item">ガスの切り替え</span>
+          <span class="service-extra-item">携帯電話プランの見直し</span>
+          <span class="service-extra-item">ネット回線の見直し</span>
         </div>
       </div>
     </div>
