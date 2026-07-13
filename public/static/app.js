@@ -122,6 +122,7 @@
   }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
 
   document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+  document.querySelectorAll('.philosophy-pillar').forEach(pillar => observer.observe(pillar));
 
   const carouselWrap = document.getElementById('worksCarouselWrap');
   if (carouselWrap) observer.observe(carouselWrap);

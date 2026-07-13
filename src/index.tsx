@@ -201,6 +201,7 @@ app.get('/', (c) => {
       </a>
       <nav class="header-nav" id="headerNav">
         <a href="#hero" class="nav-link" data-label="TOP">TOP</a>
+        <a href="#philosophy" class="nav-link" data-label="PHILOSOPHY">PHILOSOPHY</a>
         <a href="#service" class="nav-link" data-label="SERVICE">SERVICE</a>
         <a href="#works" class="nav-link" data-label="WORKS">WORKS</a>
         <a href="#contact" class="nav-link" data-label="CONTACT">CONTACT</a>
@@ -239,6 +240,48 @@ app.get('/', (c) => {
       <span>X: 34.7607</span>
       <span>Y: 135.6289</span>
       <span>Z: 0.000</span>
+    </div>
+  </section>
+
+  <!-- ====== PHILOSOPHY / 会社理念 ====== -->
+  <section id="philosophy" class="philosophy">
+    <div class="section-grid-bg"></div>
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-title-en">PHILOSOPHY</span>
+          <span class="section-title-jp">会社理念</span>
+        </h2>
+      </div>
+
+      <p class="philosophy-quote">「暮らしを豊かに、お住まいのトータルサポートを」</p>
+      <p class="philosophy-lead">
+        私たちRYOSHINは、お客様一人ひとりの「暮らし」を大切にし、より良い住環境の提供を使命としています。<br>
+        家はただの住まいではなく、生活の質を左右する大切な空間。私たちはその空間をより快適で、安全、そしてエコロジカルにするために、さまざまなサービスを提供しています。
+      </p>
+
+      <div class="philosophy-pillars">
+        <div class="philosophy-pillar" data-index="01">
+          <h3 class="philosophy-pillar-title">お客様の声を大切に</h3>
+          <p class="philosophy-pillar-text">私たちの仕事は、単なる工事やリフォームにとどまりません。お客様が抱えるお悩みや希望をしっかりとヒアリングし、それに基づいた最適な提案をすることが私たちのスタンスです。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="02">
+          <h3 class="philosophy-pillar-title">省エネと環境への配慮</h3>
+          <p class="philosophy-pillar-text">太陽光発電、蓄電池、エコキュートなどの省エネ設備を取り入れることで、持続可能な社会への貢献と、光熱費削減を実現しています。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="03">
+          <h3 class="philosophy-pillar-title">安全・安心な住まいづくり</h3>
+          <p class="philosophy-pillar-text">住宅の状態をしっかりと把握し、劣化を防ぐための定期的な点検やメンテナンスを行い、お客様が安心して暮らせる環境を提供します。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="04">
+          <h3 class="philosophy-pillar-title">空き家活用で地域貢献</h3>
+          <p class="philosophy-pillar-text">空き家をただ放置するのではなく、有効活用する方法をご提案し、地域の資源として生かせるようお手伝いしています。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="05">
+          <h3 class="philosophy-pillar-title">トータルサポートで一貫したサービス</h3>
+          <p class="philosophy-pillar-text">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。</p>
+        </div>
+      </div>
     </div>
   </section>
 
