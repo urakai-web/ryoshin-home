@@ -262,7 +262,9 @@ app.get('/', (c) => {
   <!-- ====== HERO / FV ====== -->
   <section id="hero" class="hero">
     <div class="hero-video-wrap">
-      <img src="/static/images/hero-bg.svg" alt="" class="hero-video" id="heroVideo">
+      <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
+        <source src="/static/video/hero.mp4" type="video/mp4">
+      </video>
       <div class="hero-overlay"></div>
     </div>
     <div class="hero-content">

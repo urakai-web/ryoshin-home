@@ -6,3 +6,6 @@ dist/
 .pm2/
 pids/
 .claude/settings.local.json
+
+# 生の動画素材（100MB超のためGitHubにpush不可。書き出し済みのpublic/static/video/hero.mp4のみコミットする）
+画像素材/*.mov
