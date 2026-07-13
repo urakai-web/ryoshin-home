@@ -138,52 +138,8 @@ button { cursor: pointer; border: none; background: none; }
   filter: drop-shadow(0 4px 20px rgba(42, 111, 219, 0.15));
 }
 
-.splash-line {
-  width: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #c8a84e, var(--blue), #c8a84e, transparent);
-  animation: splashLineIn 0.8s var(--ease-out-expo) 1.2s forwards;
-}
-
-/* ── スプラッシュテキスト（ラインと同じ中央から両端へ） ── */
-.splash-grid-text {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 1.6rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  /* メタリックブルー統一 */
-  background: linear-gradient(
-    170deg,
-    #1a3a6e 0%,
-    #2a6fdb 30%,
-    #4a90e8 48%,
-    #2a6fdb 55%,
-    #1a3a6e 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  white-space: nowrap;
-  /* ラインと同じ中央から両端へ伸びる登場 */
-  clip-path: inset(0 50% 0 50%);
-  animation: textCenterReveal 0.8s var(--ease-out-expo) 1.5s forwards;
-}
-
-/* ── Center Reveal キーフレーム（ラインと同じ中央から両端へ） ── */
-@keyframes textCenterReveal {
-  0% {
-    clip-path: inset(0 50% 0 50%);
-  }
-  100% {
-    clip-path: inset(0 0% 0 0%);
-  }
-}
-
 @keyframes splashLogoIn {
   to { opacity: 1; transform: scale(1) translateY(0); }
-}
-@keyframes splashLineIn {
-  to { width: 240px; }
 }
 
 /* ================================================================
@@ -238,17 +194,7 @@ button { cursor: pointer; border: none; background: none; }
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  background: linear-gradient(
-    170deg,
-    #1a3a6e 0%,
-    #2a6fdb 30%,
-    #4a90e8 48%,
-    #2a6fdb 55%,
-    #1a3a6e 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #1a1a2e;
 }
 
 .header-nav {

@@ -7,7 +7,7 @@
 
   // ── SPLASH SCREEN ──
   const splash = document.getElementById('splash');
-  const SPLASH_DURATION = 3500;
+  const SPLASH_DURATION = 1800;
 
   function dismissSplash() {
     if (!splash) return;

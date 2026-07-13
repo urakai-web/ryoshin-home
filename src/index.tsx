@@ -255,8 +255,6 @@ app.get('/', (c) => {
       <div class="splash-logo-wrap">
         <img src="/static/images/logo.png" alt="RYOSHIN" class="splash-logo" id="splashLogo">
       </div>
-      <div class="splash-line" id="splashLine"></div>
-      <div class="splash-grid-text" id="splashGridText">株式会社&nbsp;RYOSHIN</div>
     </div>
   </div>
 
