@@ -1,0 +1,23 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="g6" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(42,111,219,0.10)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="500" fill="#f5f5f8"/>
+  <rect width="800" height="500" fill="url(#g6)"/>
+  <g stroke="#2a6fdb" stroke-width="3" fill="rgba(42,111,219,0.06)" stroke-dasharray="8 6">
+    <path d="M 260 360 L 260 240 L 400 160 L 540 240 L 540 360 Z"/>
+  </g>
+  <g stroke="#2a6fdb" stroke-width="3" fill="none">
+    <rect x="360" y="280" width="80" height="80"/>
+  </g>
+  <g stroke="#c8a84e" stroke-width="3" fill="rgba(200,168,78,0.1)">
+    <circle cx="580" cy="300" r="28"/>
+    <line x1="600" y1="320" x2="640" y2="360" stroke-linecap="round"/>
+    <line x1="628" y1="352" x2="628" y2="368" stroke-linecap="round"/>
+    <line x1="640" y1="360" x2="656" y2="344" stroke-linecap="round"/>
+  </g>
+  <text x="40" y="450" font-family="'Roboto Mono', monospace" font-size="14" letter-spacing="2" fill="#2a6fdb" opacity="0.6">VACANT HOME MANAGEMENT</text>
+  <text x="40" y="472" font-family="'Noto Sans JP', sans-serif" font-size="13" fill="#8888a0">空き家管理・利活用サポート</text>
+</svg>
