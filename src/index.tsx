@@ -6,7 +6,8 @@ const SITE_URL = 'https://ryoshin-home.com'
 
 // ================================================================
 //  施工事例データ（静的）
-//  ※ 現在はプレースホルダー画像です。実際の施工写真が届き次第、
+//  ※ 太陽光発電・エコキュートは実際の施工写真、それ以外は準備中のため
+//    プレースホルダー画像です。実際の施工写真が届き次第、
 //    /public/static/images/works/ 配下の画像を差し替えてください。
 // ================================================================
 const CATEGORIES = [
@@ -23,7 +24,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: 'パネル・パワーコンディショナ設置',
     description: '屋根の状況に合わせた最適なパネル配置で、電気代削減と売電収入をサポートします。',
-    image: '/static/images/works/solar.svg',
+    image: '/static/images/works/solar.jpg',
   },
   {
     title: '蓄電池システム導入工事',
@@ -41,7 +42,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: '本体交換・配管工事',
     description: '省エネ給湯への切り替えで、光熱費を抑えながら快適な暮らしを実現します。',
-    image: '/static/images/works/ecocute.svg',
+    image: '/static/images/works/ecocute.jpg',
   },
   {
     title: 'オール浄水器設置工事',
@@ -115,7 +116,7 @@ function renderHead(title: string, description: string, path: string): string {
     "name": "株式会社RYOSHIN",
     "description": "省エネ設備、住宅リフォーム、空き家対策をワンストップで提供する総合生活サポート企業。",
     "url": "${SITE_URL}",
-    "logo": "${SITE_URL}/static/images/logo.svg",
+    "logo": "${SITE_URL}/static/images/logo.png",
     "image": "${SITE_URL}/static/images/ogp-image.svg",
     "telephone": "0120-60-4337",
     "address": {
@@ -157,7 +158,7 @@ function renderHeader(isHome: boolean): string {
   <header id="header" class="header${isHome ? '' : ' visible'}">
     <div class="header-inner">
       <a href="/" class="header-logo">
-        <img src="/static/images/logo.svg" alt="RYOSHIN" class="header-logo-img">
+        <img src="/static/images/logo.png" alt="RYOSHIN" class="header-logo-img">
         <span class="header-logo-text">株式会社 RYOSHIN</span>
       </a>
       <nav class="header-nav" id="headerNav">
@@ -179,7 +180,7 @@ function renderFooter(): string {
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-logo">
-        <img src="/static/images/logo.svg" alt="RYOSHIN" class="footer-logo-img">
+        <img src="/static/images/logo.png" alt="RYOSHIN" class="footer-logo-img">
         <span class="footer-company">株式会社 RYOSHIN</span>
       </div>
       <div class="footer-info">
@@ -249,7 +250,7 @@ app.get('/', (c) => {
   <div id="splash" class="splash">
     <div class="splash-inner">
       <div class="splash-logo-wrap">
-        <img src="/static/images/logo.svg" alt="RYOSHIN" class="splash-logo" id="splashLogo">
+        <img src="/static/images/logo.png" alt="RYOSHIN" class="splash-logo" id="splashLogo">
       </div>
       <div class="splash-line" id="splashLine"></div>
       <div class="splash-grid-text" id="splashGridText">株式会社&nbsp;RYOSHIN</div>
@@ -375,7 +376,7 @@ app.get('/', (c) => {
           <span class="section-title-jp">施工事例</span>
         </h2>
         <p class="section-desc">太陽光発電から住宅リフォームまで、対応可能な工事内容の一部をご紹介します。<br>
-          <span class="works-note">※ 掲載写真は準備中のイメージです。実際の施工写真が届き次第、順次更新いたします。</span>
+          <span class="works-note">※ 一部の写真は準備中のイメージです。実際の施工写真が届き次第、順次更新いたします。</span>
         </p>
       </div>
 
