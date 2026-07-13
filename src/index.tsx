@@ -2,6 +2,8 @@ import { Hono } from 'hono'
 
 const app = new Hono()
 
+const SITE_URL = 'https://ryoshin-home.com'
+
 // ================================================================
 //  施工事例データ（静的）
 //  ※ 現在はプレースホルダー画像です。実際の施工写真が届き次第、
@@ -71,7 +73,131 @@ const WORKS = [
 ]
 
 // ================================================================
-//  メインページ（SSR）
+//  共通レイアウト
+// ================================================================
+function renderHead(title: string, description: string, path: string): string {
+  const url = `${SITE_URL}${path}`
+  return `
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title}</title>
+  <meta name="description" content="${description}">
+  <meta name="keywords" content="RYOSHIN,太陽光発電,蓄電池,エコキュート,オール浄水器,住宅リフォーム,外壁塗装,空き家対策,寝屋川市">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="株式会社RYOSHIN">
+
+  <!-- ファビコン -->
+  <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+  <link rel="apple-touch-icon" href="/static/images/favicon.svg">
+
+  <!-- OGP（SNSシェア・検索結果プレビュー用） -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="株式会社RYOSHIN">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:url" content="${url}">
+  <meta property="og:image" content="${SITE_URL}/static/images/ogp-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${SITE_URL}/static/images/ogp-image.svg">
+
+  <!-- 構造化データ（JSON-LD） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "株式会社RYOSHIN",
+    "description": "省エネ設備、住宅リフォーム、空き家対策をワンストップで提供する総合生活サポート企業。",
+    "url": "${SITE_URL}",
+    "logo": "${SITE_URL}/static/images/logo.svg",
+    "image": "${SITE_URL}/static/images/ogp-image.svg",
+    "telephone": "0120-60-4337",
+    "address": {
+      "@type": "PostalAddress",
+      "postalCode": "572-0022",
+      "addressRegion": "大阪府",
+      "addressLocality": "寝屋川市",
+      "streetAddress": "緑町12番13号サンハイツ302",
+      "addressCountry": "JP"
+    },
+    "serviceType": [
+      "太陽光発電設置工事",
+      "蓄電池設置工事",
+      "エコキュート設置",
+      "オール浄水器設置",
+      "住宅リフォーム",
+      "外壁塗装・屋根工事",
+      "空き家管理・利活用サポート"
+    ]
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) を設置する場合はここに追加してください -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@200;300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="/static/style.css" rel="stylesheet">`
+}
+
+// isHome: トップページかどうかで、アンカーリンク or ページ遷移リンクを切り替える
+function renderHeader(isHome: boolean): string {
+  const topHref     = isHome ? '#hero' : '/'
+  const serviceHref = isHome ? '#service' : '/#service'
+  const worksHref    = isHome ? '#works' : '/#works'
+  const contactHref  = isHome ? '#contact' : '/#contact'
+
+  return `
+  <header id="header" class="header${isHome ? '' : ' visible'}">
+    <div class="header-inner">
+      <a href="/" class="header-logo">
+        <img src="/static/images/logo.svg" alt="RYOSHIN" class="header-logo-img">
+        <span class="header-logo-text">株式会社 RYOSHIN</span>
+      </a>
+      <nav class="header-nav" id="headerNav">
+        <a href="${topHref}" class="nav-link" data-label="TOP">TOP</a>
+        <a href="/philosophy" class="nav-link" data-label="PHILOSOPHY">PHILOSOPHY</a>
+        <a href="${serviceHref}" class="nav-link" data-label="SERVICE">SERVICE</a>
+        <a href="${worksHref}" class="nav-link" data-label="WORKS">WORKS</a>
+        <a href="${contactHref}" class="nav-link" data-label="CONTACT">CONTACT</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>`
+}
+
+function renderFooter(): string {
+  return `
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-logo">
+        <img src="/static/images/logo.svg" alt="RYOSHIN" class="footer-logo-img">
+        <span class="footer-company">株式会社 RYOSHIN</span>
+      </div>
+      <div class="footer-info">
+        <p class="footer-address">
+          〒572-0022<br>
+          大阪府寝屋川市緑町12番13号サンハイツ302
+        </p>
+        <p class="footer-tel">TEL: 0120-60-4337</p>
+      </div>
+      <div class="footer-copy">
+        <span>&copy; 2026 株式会社 RYOSHIN. All Rights Reserved.</span>
+      </div>
+    </div>
+  </footer>`
+}
+
+// ================================================================
+//  トップページ（SSR）
 // ================================================================
 app.get('/', (c) => {
   const worksJSON      = JSON.stringify(WORKS)
@@ -111,73 +237,11 @@ app.get('/', (c) => {
 
   return c.html(`<!DOCTYPE html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>株式会社RYOSHIN</title>
-  <meta name="description" content="株式会社RYOSHIN - 太陽光発電・蓄電池・エコキュートなどの省エネ設備から、外壁塗装・水回り・内装などの住宅リフォーム、空き家対策まで。大阪府寝屋川市を拠点に、暮らしをトータルサポートします。">
-  <meta name="keywords" content="RYOSHIN,太陽光発電,蓄電池,エコキュート,オール浄水器,住宅リフォーム,外壁塗装,空き家対策,寝屋川市">
-  <meta name="robots" content="index, follow">
-  <meta name="author" content="株式会社RYOSHIN">
-
-  <!-- ファビコン -->
-  <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
-  <link rel="apple-touch-icon" href="/static/images/favicon.svg">
-
-  <!-- OGP（SNSシェア・検索結果プレビュー用） -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="株式会社RYOSHIN">
-  <meta property="og:title" content="株式会社RYOSHIN">
-  <meta property="og:description" content="暮らしを豊かに、住まいのトータルサポートを。省エネ設備からリフォーム、空き家対策まで。">
-  <meta property="og:url" content="https://ryoshin-home.com">
-  <meta property="og:image" content="https://ryoshin-home.com/static/images/ogp-image.svg">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="ja_JP">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="株式会社RYOSHIN">
-  <meta name="twitter:description" content="暮らしを豊かに、住まいのトータルサポートを。省エネ設備からリフォーム、空き家対策まで。">
-  <meta name="twitter:image" content="https://ryoshin-home.com/static/images/ogp-image.svg">
-
-  <!-- 構造化データ（JSON-LD） -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "株式会社RYOSHIN",
-    "description": "省エネ設備、住宅リフォーム、空き家対策をワンストップで提供する総合生活サポート企業。",
-    "url": "https://ryoshin-home.com",
-    "logo": "https://ryoshin-home.com/static/images/logo.svg",
-    "image": "https://ryoshin-home.com/static/images/ogp-image.svg",
-    "telephone": "0120-60-4337",
-    "address": {
-      "@type": "PostalAddress",
-      "postalCode": "572-0022",
-      "addressRegion": "大阪府",
-      "addressLocality": "寝屋川市",
-      "streetAddress": "緑町12番13号サンハイツ302",
-      "addressCountry": "JP"
-    },
-    "serviceType": [
-      "太陽光発電設置工事",
-      "蓄電池設置工事",
-      "エコキュート設置",
-      "オール浄水器設置",
-      "住宅リフォーム",
-      "外壁塗装・屋根工事",
-      "空き家管理・利活用サポート"
-    ]
-  }
-  </script>
-
-  <!-- Google tag (gtag.js) を設置する場合はここに追加してください -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@200;300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="/static/style.css" rel="stylesheet">
+<head>${renderHead(
+    '株式会社RYOSHIN',
+    '株式会社RYOSHIN - 太陽光発電・蓄電池・エコキュートなどの省エネ設備から、外壁塗装・水回り・内装などの住宅リフォーム、空き家対策まで。大阪府寝屋川市を拠点に、暮らしをトータルサポートします。',
+    '/'
+  )}
 </head>
 <body>
 
@@ -192,25 +256,7 @@ app.get('/', (c) => {
     </div>
   </div>
 
-  <!-- ====== HEADER / NAV ====== -->
-  <header id="header" class="header">
-    <div class="header-inner">
-      <a href="#" class="header-logo">
-        <img src="/static/images/logo.svg" alt="RYOSHIN" class="header-logo-img">
-        <span class="header-logo-text">株式会社 RYOSHIN</span>
-      </a>
-      <nav class="header-nav" id="headerNav">
-        <a href="#hero" class="nav-link" data-label="TOP">TOP</a>
-        <a href="#philosophy" class="nav-link" data-label="PHILOSOPHY">PHILOSOPHY</a>
-        <a href="#service" class="nav-link" data-label="SERVICE">SERVICE</a>
-        <a href="#works" class="nav-link" data-label="WORKS">WORKS</a>
-        <a href="#contact" class="nav-link" data-label="CONTACT">CONTACT</a>
-      </nav>
-      <button class="hamburger" id="hamburger" aria-label="メニュー">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  ${renderHeader(true)}
 
   <!-- ====== HERO / FV ====== -->
   <section id="hero" class="hero">
@@ -240,48 +286,6 @@ app.get('/', (c) => {
       <span>X: 34.7607</span>
       <span>Y: 135.6289</span>
       <span>Z: 0.000</span>
-    </div>
-  </section>
-
-  <!-- ====== PHILOSOPHY / 会社理念 ====== -->
-  <section id="philosophy" class="philosophy">
-    <div class="section-grid-bg"></div>
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">
-          <span class="section-title-en">PHILOSOPHY</span>
-          <span class="section-title-jp">会社理念</span>
-        </h2>
-      </div>
-
-      <p class="philosophy-quote">「暮らしを豊かに、お住まいのトータルサポートを」</p>
-      <p class="philosophy-lead">
-        私たちRYOSHINは、お客様一人ひとりの「暮らし」を大切にし、より良い住環境の提供を使命としています。<br>
-        家はただの住まいではなく、生活の質を左右する大切な空間。私たちはその空間をより快適で、安全、そしてエコロジカルにするために、さまざまなサービスを提供しています。
-      </p>
-
-      <div class="philosophy-pillars">
-        <div class="philosophy-pillar" data-index="01">
-          <h3 class="philosophy-pillar-title">お客様の声を大切に</h3>
-          <p class="philosophy-pillar-text">私たちの仕事は、単なる工事やリフォームにとどまりません。お客様が抱えるお悩みや希望をしっかりとヒアリングし、それに基づいた最適な提案をすることが私たちのスタンスです。</p>
-        </div>
-        <div class="philosophy-pillar" data-index="02">
-          <h3 class="philosophy-pillar-title">省エネと環境への配慮</h3>
-          <p class="philosophy-pillar-text">太陽光発電、蓄電池、エコキュートなどの省エネ設備を取り入れることで、持続可能な社会への貢献と、光熱費削減を実現しています。</p>
-        </div>
-        <div class="philosophy-pillar" data-index="03">
-          <h3 class="philosophy-pillar-title">安全・安心な住まいづくり</h3>
-          <p class="philosophy-pillar-text">住宅の状態をしっかりと把握し、劣化を防ぐための定期的な点検やメンテナンスを行い、お客様が安心して暮らせる環境を提供します。</p>
-        </div>
-        <div class="philosophy-pillar" data-index="04">
-          <h3 class="philosophy-pillar-title">空き家活用で地域貢献</h3>
-          <p class="philosophy-pillar-text">空き家をただ放置するのではなく、有効活用する方法をご提案し、地域の資源として生かせるようお手伝いしています。</p>
-        </div>
-        <div class="philosophy-pillar" data-index="05">
-          <h3 class="philosophy-pillar-title">トータルサポートで一貫したサービス</h3>
-          <p class="philosophy-pillar-text">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。</p>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -442,31 +446,83 @@ app.get('/', (c) => {
     </div>
   </section>
 
-  <!-- ====== FOOTER ====== -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-logo">
-        <img src="/static/images/logo.svg" alt="RYOSHIN" class="footer-logo-img">
-        <span class="footer-company">株式会社 RYOSHIN</span>
-      </div>
-      <div class="footer-info">
-        <p class="footer-address">
-          〒572-0022<br>
-          大阪府寝屋川市緑町12番13号サンハイツ302
-        </p>
-        <p class="footer-tel">TEL: 0120-60-4337</p>
-      </div>
-      <div class="footer-copy">
-        <span>&copy; 2026 株式会社 RYOSHIN. All Rights Reserved.</span>
-      </div>
-    </div>
-  </footer>
+  ${renderFooter()}
 
   <script>
     // SSR済みデータをクライアントへ渡す
     window.__WORKS__      = ${worksJSON};
     window.__CATEGORIES__ = ${categoriesJSON};
   </script>
+  <script src="/static/app.js"></script>
+</body>
+</html>`)
+})
+
+// ================================================================
+//  会社理念ページ（SSR）
+// ================================================================
+app.get('/philosophy', (c) => {
+  return c.html(`<!DOCTYPE html>
+<html lang="ja">
+<head>${renderHead(
+    '会社理念 | 株式会社RYOSHIN',
+    '株式会社RYOSHINの会社理念「暮らしを豊かに、お住まいのトータルサポートを」。私たちが大切にしている5つの価値観をご紹介します。',
+    '/philosophy'
+  )}
+</head>
+<body>
+
+  ${renderHeader(false)}
+
+  <!-- ====== PAGE HEADER ====== -->
+  <section class="page-header">
+    <div class="section-grid-bg"></div>
+    <div class="container">
+      <p class="breadcrumb"><a href="/">TOP</a><span class="breadcrumb-sep">/</span>PHILOSOPHY</p>
+      <h1 class="section-title">
+        <span class="section-title-en">PHILOSOPHY</span>
+        <span class="section-title-jp">会社理念</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- ====== PHILOSOPHY / 会社理念 ====== -->
+  <section class="philosophy philosophy-page">
+    <div class="section-grid-bg"></div>
+    <div class="container">
+      <p class="philosophy-quote">「暮らしを豊かに、お住まいのトータルサポートを」</p>
+      <p class="philosophy-lead">
+        私たちRYOSHINは、お客様一人ひとりの「暮らし」を大切にし、より良い住環境の提供を使命としています。<br>
+        家はただの住まいではなく、生活の質を左右する大切な空間。私たちはその空間をより快適で、安全、そしてエコロジカルにするために、さまざまなサービスを提供しています。
+      </p>
+
+      <div class="philosophy-pillars">
+        <div class="philosophy-pillar" data-index="01">
+          <h3 class="philosophy-pillar-title">お客様の声を大切に</h3>
+          <p class="philosophy-pillar-text">私たちの仕事は、単なる工事やリフォームにとどまりません。お客様が抱えるお悩みや希望をしっかりとヒアリングし、それに基づいた最適な提案をすることが私たちのスタンスです。どんな小さなお悩みでも遠慮せずにお話しいただければ、私たちはその解決に向けて全力でサポートいたします。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="02">
+          <h3 class="philosophy-pillar-title">省エネと環境への配慮</h3>
+          <p class="philosophy-pillar-text">太陽光発電、蓄電池、エコキュートなどの省エネ設備を取り入れることで、持続可能な社会への貢献と、光熱費削減を実現しています。地球にもお客様にもやさしい暮らしを提案します。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="03">
+          <h3 class="philosophy-pillar-title">安全・安心な住まいづくり</h3>
+          <p class="philosophy-pillar-text">住宅の状態をしっかりと把握し、劣化を防ぐための定期的な点検やメンテナンスを行い、お客様が安心して暮らせる環境を提供します。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="04">
+          <h3 class="philosophy-pillar-title">空き家活用で地域貢献</h3>
+          <p class="philosophy-pillar-text">空き家をただ放置するのではなく、有効活用する方法をご提案し、地域の資源として生かせるようお手伝いしています。空き家対策を通じて、地域社会の活性化にも貢献します。</p>
+        </div>
+        <div class="philosophy-pillar" data-index="05">
+          <h3 class="philosophy-pillar-title">トータルサポートで一貫したサービス</h3>
+          <p class="philosophy-pillar-text">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。私たちは、単なる建築会社ではなく、お客様のライフスタイルをサポートするパートナーであり続けることを約束します。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  ${renderFooter()}
+
   <script src="/static/app.js"></script>
 </body>
 </html>`)

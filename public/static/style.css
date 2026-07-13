@@ -597,6 +597,44 @@ section {
 }
 
 /* ================================================================
+   PAGE HEADER（サブページ共通の簡易ヒーロー）
+   ================================================================ */
+.page-header {
+  padding: 160px 0 60px;
+  background: var(--bg-dark);
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb a {
+  color: var(--blue);
+}
+
+.breadcrumb-sep {
+  color: var(--border-light);
+}
+
+.page-header .section-title {
+  position: relative;
+  z-index: 1;
+}
+
+.philosophy-page {
+  padding-top: 80px;
+}
+
+/* ================================================================
    PHILOSOPHY SECTION
    ================================================================ */
 .philosophy {
