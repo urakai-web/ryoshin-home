@@ -288,11 +288,6 @@ app.get('/', (c) => {
         <div class="hero-scroll-line"></div>
       </div>
     </div>
-    <div class="hero-coords">
-      <span>X: 34.7607</span>
-      <span>Y: 135.6289</span>
-      <span>Z: 0.000</span>
-    </div>
   </section>
 
   <!-- ====== SERVICE ====== -->
