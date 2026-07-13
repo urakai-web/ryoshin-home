@@ -304,63 +304,93 @@ app.get('/', (c) => {
 
       <div class="service-grid">
         <div class="service-card" data-index="01">
-          <div class="service-card-header">
-            <span class="service-label-en">SOLAR POWER</span>
+          <div class="service-card-img-wrap">
+            <img src="/static/images/works/solar.jpg" alt="太陽光発電" class="service-card-img" loading="lazy">
           </div>
-          <h3 class="service-name">太陽光発電</h3>
-          <p class="service-tagline">電気をつくり、暮らしの経済を変える。</p>
-          <p class="service-text">太陽光発電システムの設置により、電気代の削減と余剰電力の売電を実現。環境にもお財布にもやさしい暮らしをサポートします。</p>
-          <div class="service-card-line"></div>
+          <div class="service-card-body" data-index="01">
+            <div class="service-card-header">
+              <span class="service-label-en">SOLAR POWER</span>
+            </div>
+            <h3 class="service-name">太陽光発電</h3>
+            <p class="service-tagline">電気をつくり、暮らしの経済を変える。</p>
+            <p class="service-text">太陽光発電システムの設置により、電気代の削減と余剰電力の売電を実現。環境にもお財布にもやさしい暮らしをサポートします。</p>
+            <div class="service-card-line"></div>
+          </div>
         </div>
 
         <div class="service-card" data-index="02">
-          <div class="service-card-header">
-            <span class="service-label-en">BATTERY STORAGE</span>
+          <div class="service-card-img-wrap">
+            <img src="/static/images/works/battery.svg" alt="蓄電池" class="service-card-img" loading="lazy">
           </div>
-          <h3 class="service-name">蓄電池</h3>
-          <p class="service-tagline">電気を蓄え、もしもの時も安心を。</p>
-          <p class="service-text">太陽光でつくった電気を蓄えて有効活用。停電など緊急時にも電気を使い続けられる、災害に強い住まいを実現します。</p>
-          <div class="service-card-line"></div>
+          <div class="service-card-body" data-index="02">
+            <div class="service-card-header">
+              <span class="service-label-en">BATTERY STORAGE</span>
+            </div>
+            <h3 class="service-name">蓄電池</h3>
+            <p class="service-tagline">電気を蓄え、もしもの時も安心を。</p>
+            <p class="service-text">太陽光でつくった電気を蓄えて有効活用。停電など緊急時にも電気を使い続けられる、災害に強い住まいを実現します。</p>
+            <div class="service-card-line"></div>
+          </div>
         </div>
 
         <div class="service-card" data-index="03">
-          <div class="service-card-header">
-            <span class="service-label-en">ECO WATER HEATER</span>
+          <div class="service-card-img-wrap">
+            <img src="/static/images/works/ecocute.jpg" alt="エコキュート" class="service-card-img" loading="lazy">
           </div>
-          <h3 class="service-name">エコキュート</h3>
-          <p class="service-tagline">お湯を、賢く効率的に。</p>
-          <p class="service-text">少ない電力でお湯を沸かす省エネ給湯システム。導入からアフターサポート、定期点検まで一貫して対応します。</p>
-          <div class="service-card-line"></div>
+          <div class="service-card-body" data-index="03">
+            <div class="service-card-header">
+              <span class="service-label-en">ECO WATER HEATER</span>
+            </div>
+            <h3 class="service-name">エコキュート</h3>
+            <p class="service-tagline">お湯を、賢く効率的に。</p>
+            <p class="service-text">少ない電力でお湯を沸かす省エネ給湯システム。導入からアフターサポート、定期点検まで一貫して対応します。</p>
+            <div class="service-card-line"></div>
+          </div>
         </div>
 
         <div class="service-card" data-index="04">
-          <div class="service-card-header">
-            <span class="service-label-en">WHOLE-HOUSE PURIFIER</span>
+          <div class="service-card-img-wrap">
+            <img src="/static/images/works/purifier.svg" alt="セントラル浄水器" class="service-card-img" loading="lazy">
           </div>
-          <h3 class="service-name">セントラル浄水器</h3>
-          <p class="service-tagline">家中まるごと、いつでも安心なお水を。</p>
-          <p class="service-text">1台で家中の蛇口をまるごと浄水するセントラル浄水システム。お子様やペットにも、家中どこでも安心してお水をご利用いただけます。</p>
-          <div class="service-card-line"></div>
+          <div class="service-card-body" data-index="04">
+            <div class="service-card-header">
+              <span class="service-label-en">WHOLE-HOUSE PURIFIER</span>
+            </div>
+            <h3 class="service-name">セントラル浄水器</h3>
+            <p class="service-tagline">家中まるごと、いつでも安心なお水を。</p>
+            <p class="service-text">1台で家中の蛇口をまるごと浄水するセントラル浄水システム。お子様やペットにも、家中どこでも安心してお水をご利用いただけます。</p>
+            <div class="service-card-line"></div>
+          </div>
         </div>
 
         <div class="service-card" data-index="05">
-          <div class="service-card-header">
-            <span class="service-label-en">HOME RENOVATION</span>
+          <div class="service-card-img-wrap">
+            <img src="/static/images/works/reform.svg" alt="住宅リフォーム" class="service-card-img" loading="lazy">
           </div>
-          <h3 class="service-name">住宅リフォーム</h3>
-          <p class="service-tagline">暮らしに合わせて、住まいを最適化。</p>
-          <p class="service-text">外壁塗装・屋根工事、水回り工事、内装・外構工事まで幅広く対応。丁寧なヒアリングで、お客様一人ひとりに合ったプランをご提案します。</p>
-          <div class="service-card-line"></div>
+          <div class="service-card-body" data-index="05">
+            <div class="service-card-header">
+              <span class="service-label-en">HOME RENOVATION</span>
+            </div>
+            <h3 class="service-name">住宅リフォーム</h3>
+            <p class="service-tagline">暮らしに合わせて、住まいを最適化。</p>
+            <p class="service-text">外壁塗装・屋根工事、水回り工事、内装・外構工事まで幅広く対応。丁寧なヒアリングで、お客様一人ひとりに合ったプランをご提案します。</p>
+            <div class="service-card-line"></div>
+          </div>
         </div>
 
         <div class="service-card" data-index="06">
-          <div class="service-card-header">
-            <span class="service-label-en">VACANT HOME</span>
+          <div class="service-card-img-wrap">
+            <img src="/static/images/works/vacant.svg" alt="空き家対策" class="service-card-img" loading="lazy">
           </div>
-          <h3 class="service-name">空き家対策</h3>
-          <p class="service-tagline">眠る資産を、地域の価値へ。</p>
-          <p class="service-text">空き家の定期点検・清掃・防犯対策から、賃貸活用やリフォーム後の売却まで。大切な資産を守り、有効活用するお手伝いをします。</p>
-          <div class="service-card-line"></div>
+          <div class="service-card-body" data-index="06">
+            <div class="service-card-header">
+              <span class="service-label-en">VACANT HOME</span>
+            </div>
+            <h3 class="service-name">空き家対策</h3>
+            <p class="service-tagline">眠る資産を、地域の価値へ。</p>
+            <p class="service-text">空き家の定期点検・清掃・防犯対策から、賃貸活用やリフォーム後の売却まで。大切な資産を守り、有効活用するお手伝いをします。</p>
+            <div class="service-card-line"></div>
+          </div>
         </div>
       </div>
 
