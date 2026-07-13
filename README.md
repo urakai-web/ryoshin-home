@@ -35,6 +35,12 @@
 
 `画像素材/` フォルダには未使用の予備カット（エコキュート施工前後の別アングル、太陽光設置前カット）も残していますので、before/afterギャラリーなどに使う場合はご活用ください。
 
+## 会社理念（PHILOSOPHY）ページの画像について
+5つの柱のうち4つは `画像素材/` フォルダにいただいた実写真を圧縮して使用しています
+（`public/static/images/philosophy/hearing.jpg`, `energy.jpg`, `inspection.jpg`, `vacant-house.jpg`）。
+「トータルサポートで一貫したサービス」の柱のみ、写真が届いていないためテキストのみのカード（`philosophy-pillar-noimg`）になっています。
+写真が届いたら `public/static/images/philosophy/` に配置し、`src/index.tsx` の5つ目の `philosophy-pillar` に画像を追加してください（他4つのマークアップを参考に）。
+
 ## 差し替えが必要なプレースホルダー素材
 以下は仮のSVGプレースホルダーです。実素材が揃い次第、差し替えてください（ロゴ・太陽光・エコキュートは差し替え済み）。
 | ファイル | 用途 |
