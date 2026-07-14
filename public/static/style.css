@@ -598,6 +598,7 @@ section {
   margin-bottom: 32px;
   position: relative;
   z-index: 1;
+  white-space: nowrap;
 }
 
 .philosophy-lead {
@@ -680,6 +681,7 @@ section {
 
 @media (max-width: 768px) {
   .philosophy { padding: 100px 0; }
+  .philosophy-quote { font-size: clamp(0.7rem, 3.6vw, 1.4rem); }
   .philosophy-story { gap: 64px; }
   .philosophy-row,
   .philosophy-row:nth-child(even) {
