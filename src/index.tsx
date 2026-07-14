@@ -33,7 +33,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: '蓄電池本体・システム連携設置',
     description: '太陽光との連携で、停電時にも安心な自家発電・自家消費の仕組みを構築します。',
-    image: '/static/images/works/battery.svg',
+    image: '/static/images/works/battery.jpg',
   },
   {
     title: 'エコキュート設置・交換工事',
@@ -51,7 +51,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: 'セントラル浄水システム設置',
     description: '家中の蛇口をまるごと浄水。安全でおいしい水を暮らし全体でご利用いただけます。',
-    image: '/static/images/works/purifier.svg',
+    image: '/static/images/works/purifier.jpg',
   },
   {
     title: '外壁塗装・屋根リフォーム工事',
@@ -183,7 +183,6 @@ function renderFooter(): string {
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-logo">
-        <img src="/static/images/logo.png" alt="RYOSHIN" class="footer-logo-img">
         <span class="footer-company">株式会社 RYOSHIN</span>
       </div>
       <div class="footer-info">
@@ -317,7 +316,7 @@ app.get('/', (c) => {
 
         <div class="service-card" data-index="02">
           <div class="service-card-img-wrap">
-            <img src="/static/images/works/battery.svg" alt="蓄電池" class="service-card-img" loading="lazy">
+            <img src="/static/images/works/battery.jpg" alt="蓄電池" class="service-card-img" loading="lazy">
           </div>
           <div class="service-card-body" data-index="02">
             <div class="service-card-header">
@@ -347,7 +346,7 @@ app.get('/', (c) => {
 
         <div class="service-card" data-index="04">
           <div class="service-card-img-wrap">
-            <img src="/static/images/works/purifier.svg" alt="セントラル浄水器" class="service-card-img" loading="lazy">
+            <img src="/static/images/works/purifier.jpg" alt="セントラル浄水器" class="service-card-img" loading="lazy">
           </div>
           <div class="service-card-body" data-index="04">
             <div class="service-card-header">
@@ -533,48 +532,52 @@ app.get('/philosophy', (c) => {
         家はただの住まいではなく、生活の質を左右する大切な空間。私たちはその空間をより快適で、安全、そしてエコロジカルにするために、さまざまなサービスを提供しています。
       </p>
 
-      <div class="philosophy-pillars">
-        <div class="philosophy-pillar">
-          <div class="philosophy-pillar-img-wrap">
-            <img src="/static/images/philosophy/hearing.jpg" alt="お客様の声を大切に" class="philosophy-pillar-img" loading="lazy">
+      <div class="philosophy-story">
+        <div class="philosophy-row">
+          <div class="philosophy-row-img">
+            <img src="/static/images/philosophy/hearing.jpg" alt="お客様の声を大切に" loading="lazy">
           </div>
-          <div class="philosophy-pillar-body" data-index="01">
-            <h3 class="philosophy-pillar-title">お客様の声を大切に</h3>
-            <p class="philosophy-pillar-text">私たちの仕事は、単なる工事やリフォームにとどまりません。お客様が抱えるお悩みや希望をしっかりとヒアリングし、それに基づいた最適な提案をすることが私たちのスタンスです。どんな小さなお悩みでも遠慮せずにお話しいただければ、私たちはその解決に向けて全力でサポートいたします。</p>
-          </div>
-        </div>
-        <div class="philosophy-pillar">
-          <div class="philosophy-pillar-img-wrap">
-            <img src="/static/images/philosophy/energy.jpg" alt="省エネと環境への配慮" class="philosophy-pillar-img" loading="lazy">
-          </div>
-          <div class="philosophy-pillar-body" data-index="02">
-            <h3 class="philosophy-pillar-title">省エネと環境への配慮</h3>
-            <p class="philosophy-pillar-text">太陽光発電、蓄電池、エコキュートなどの省エネ設備を取り入れることで、持続可能な社会への貢献と、光熱費削減を実現しています。地球にもお客様にもやさしい暮らしを提案します。</p>
+          <div class="philosophy-row-text">
+            <span class="philosophy-row-index">01</span>
+            <h3 class="philosophy-row-title">お客様の声を大切に</h3>
+            <p class="philosophy-row-desc">私たちの仕事は、単なる工事やリフォームにとどまりません。お客様が抱えるお悩みや希望をしっかりとヒアリングし、それに基づいた最適な提案をすることが私たちのスタンスです。どんな小さなお悩みでも遠慮せずにお話しいただければ、私たちはその解決に向けて全力でサポートいたします。</p>
           </div>
         </div>
-        <div class="philosophy-pillar">
-          <div class="philosophy-pillar-img-wrap">
-            <img src="/static/images/philosophy/inspection.jpg" alt="安全・安心な住まいづくり" class="philosophy-pillar-img" loading="lazy">
+        <div class="philosophy-row">
+          <div class="philosophy-row-img">
+            <img src="/static/images/philosophy/energy.jpg" alt="省エネと環境への配慮" loading="lazy">
           </div>
-          <div class="philosophy-pillar-body" data-index="03">
-            <h3 class="philosophy-pillar-title">安全・安心な住まいづくり</h3>
-            <p class="philosophy-pillar-text">住宅の状態をしっかりと把握し、劣化を防ぐための定期的な点検やメンテナンスを行い、お客様が安心して暮らせる環境を提供します。</p>
-          </div>
-        </div>
-        <div class="philosophy-pillar">
-          <div class="philosophy-pillar-img-wrap">
-            <img src="/static/images/philosophy/vacant-house.jpg" alt="空き家活用で地域貢献" class="philosophy-pillar-img" loading="lazy">
-          </div>
-          <div class="philosophy-pillar-body" data-index="04">
-            <h3 class="philosophy-pillar-title">空き家活用で地域貢献</h3>
-            <p class="philosophy-pillar-text">空き家をただ放置するのではなく、有効活用する方法をご提案し、地域の資源として生かせるようお手伝いしています。空き家対策を通じて、地域社会の活性化にも貢献します。</p>
+          <div class="philosophy-row-text">
+            <span class="philosophy-row-index">02</span>
+            <h3 class="philosophy-row-title">省エネと環境への配慮</h3>
+            <p class="philosophy-row-desc">太陽光発電、蓄電池、エコキュートなどの省エネ設備を取り入れることで、持続可能な社会への貢献と、光熱費削減を実現しています。地球にもお客様にもやさしい暮らしを提案します。</p>
           </div>
         </div>
-        <div class="philosophy-pillar philosophy-pillar-noimg">
-          <div class="philosophy-pillar-body" data-index="05">
-            <h3 class="philosophy-pillar-title">トータルサポートで一貫したサービス</h3>
-            <p class="philosophy-pillar-text">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。私たちは、単なる建築会社ではなく、お客様のライフスタイルをサポートするパートナーであり続けることを約束します。</p>
+        <div class="philosophy-row">
+          <div class="philosophy-row-img">
+            <img src="/static/images/philosophy/inspection.jpg" alt="安全・安心な住まいづくり" loading="lazy">
           </div>
+          <div class="philosophy-row-text">
+            <span class="philosophy-row-index">03</span>
+            <h3 class="philosophy-row-title">安全・安心な住まいづくり</h3>
+            <p class="philosophy-row-desc">住宅の状態をしっかりと把握し、劣化を防ぐための定期的な点検やメンテナンスを行い、お客様が安心して暮らせる環境を提供します。</p>
+          </div>
+        </div>
+        <div class="philosophy-row">
+          <div class="philosophy-row-img">
+            <img src="/static/images/philosophy/vacant-house.jpg" alt="空き家活用で地域貢献" loading="lazy">
+          </div>
+          <div class="philosophy-row-text">
+            <span class="philosophy-row-index">04</span>
+            <h3 class="philosophy-row-title">空き家活用で地域貢献</h3>
+            <p class="philosophy-row-desc">空き家をただ放置するのではなく、有効活用する方法をご提案し、地域の資源として生かせるようお手伝いしています。空き家対策を通じて、地域社会の活性化にも貢献します。</p>
+          </div>
+        </div>
+
+        <div class="philosophy-closing">
+          <span class="philosophy-row-index">05</span>
+          <h3 class="philosophy-row-title">トータルサポートで一貫したサービス</h3>
+          <p class="philosophy-row-desc">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。私たちは、単なる建築会社ではなく、お客様のライフスタイルをサポートするパートナーであり続けることを約束します。</p>
         </div>
       </div>
     </div>
