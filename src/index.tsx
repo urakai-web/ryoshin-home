@@ -60,7 +60,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: '外壁塗装・屋根工事',
     description: '建物を守り、美観を保つ塗装工事。水回り・内装・外構工事にも幅広く対応します。',
-    image: '/static/images/works/reform.svg',
+    image: '/static/images/works/reform.jpg',
   },
   {
     title: '空き家管理・利活用サポート',
@@ -69,7 +69,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: '定期点検・清掃・利活用提案',
     description: '空き家の劣化防止から賃貸・売却提案まで、資産価値を守る管理をサポートします。',
-    image: '/static/images/works/vacant.svg',
+    image: '/static/images/works/vacant.jpg',
   },
 ]
 
@@ -361,7 +361,7 @@ app.get('/', (c) => {
 
         <div class="service-card" data-index="05">
           <div class="service-card-img-wrap">
-            <img src="/static/images/works/reform.svg" alt="住宅リフォーム" class="service-card-img" loading="lazy">
+            <img src="/static/images/works/reform.jpg" alt="住宅リフォーム" class="service-card-img" loading="lazy">
           </div>
           <div class="service-card-body" data-index="05">
             <div class="service-card-header">
@@ -376,7 +376,7 @@ app.get('/', (c) => {
 
         <div class="service-card" data-index="06">
           <div class="service-card-img-wrap">
-            <img src="/static/images/works/vacant.svg" alt="空き家対策" class="service-card-img" loading="lazy">
+            <img src="/static/images/works/vacant.jpg" alt="空き家対策" class="service-card-img" loading="lazy">
           </div>
           <div class="service-card-body" data-index="06">
             <div class="service-card-header">
@@ -574,10 +574,15 @@ app.get('/philosophy', (c) => {
           </div>
         </div>
 
-        <div class="philosophy-closing">
-          <span class="philosophy-row-index">05</span>
-          <h3 class="philosophy-row-title">トータルサポートで一貫したサービス</h3>
-          <p class="philosophy-row-desc">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。私たちは、単なる建築会社ではなく、お客様のライフスタイルをサポートするパートナーであり続けることを約束します。</p>
+        <div class="philosophy-row">
+          <div class="philosophy-row-img">
+            <img src="/static/images/philosophy/team.jpg" alt="トータルサポートで一貫したサービス" loading="lazy">
+          </div>
+          <div class="philosophy-row-text">
+            <span class="philosophy-row-index">05</span>
+            <h3 class="philosophy-row-title">トータルサポートで一貫したサービス</h3>
+            <p class="philosophy-row-desc">住宅の新設からリフォーム、省エネ設備の導入、そして空き家管理まで、すべてのサービスが連携し、総合的にお客様の暮らしを豊かにすることを目指しています。私たちは、単なる建築会社ではなく、お客様のライフスタイルをサポートするパートナーであり続けることを約束します。</p>
+          </div>
         </div>
       </div>
     </div>

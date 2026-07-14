@@ -678,18 +678,6 @@ section {
   max-width: 480px;
 }
 
-.philosophy-closing {
-  padding-top: 64px;
-  border-top: 1px dashed var(--border-light);
-  max-width: 640px;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-.philosophy-closing .philosophy-row-desc {
-  max-width: none;
-}
-
 @media (max-width: 768px) {
   .philosophy { padding: 100px 0; }
   .philosophy-story { gap: 64px; }
@@ -701,7 +689,6 @@ section {
   }
   .philosophy-row-img { aspect-ratio: 16 / 10; }
   .philosophy-row-desc { max-width: none; }
-  .philosophy-closing { padding-top: 48px; }
 }
 
 /* ================================================================
