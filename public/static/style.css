@@ -882,45 +882,6 @@ section {
   /* WORKSはカード外テキストがあるので白背景上のダーク文字で表示 */
 }
 
-/* ── カテゴリフィルタ ── */
-.works-filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 36px;
-}
-
-.works-filter-btn {
-  padding: 7px 18px;
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  background: transparent;
-  color: var(--text-secondary);
-  font-family: var(--font-jp);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.15s;
-  white-space: nowrap;
-}
-
-.works-filter-btn:hover {
-  border-color: var(--blue);
-  color: var(--blue);
-  background: var(--blue-pale);
-}
-
-.works-filter-btn.active {
-  background: var(--blue);
-  border-color: var(--blue);
-  color: #fff;
-}
-
-.works-filter-btn:active {
-  transform: scale(0.97);
-}
-
 /* ── ローディングインジケーター ── */
 .works-loading {
   display: none;
@@ -1241,16 +1202,6 @@ section {
 /* モバイル */
 @media (max-width: 768px) {
   .works { padding: 100px 0; }
-
-  .works-filter {
-    gap: 6px;
-    margin-bottom: 24px;
-  }
-
-  .works-filter-btn {
-    padding: 6px 12px;
-    font-size: 0.72rem;
-  }
 
   .works-carousel-viewport {
     /* コンテナのpaddingを超えて左端まで伸ばす */

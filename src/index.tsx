@@ -9,12 +9,6 @@ const SITE_URL = 'https://ryoshin-home.com'
 //  すべて実際の施工写真。beforeImage が設定されている項目は
 //  WORKSカードにBefore/Afterトグルボタンが表示される。
 // ================================================================
-const CATEGORIES = [
-  { id: 'energy', name: '省エネ設備事業', slug: 'energy' },
-  { id: 'reform', name: 'リフォーム事業', slug: 'reform' },
-  { id: 'vacant', name: '空き家事業', slug: 'vacant' },
-]
-
 const WORKS = [
   {
     title: '太陽光発電システム設置工事①',
@@ -292,8 +286,7 @@ function renderFooter(): string {
 //  トップページ（SSR）
 // ================================================================
 app.get('/', (c) => {
-  const worksJSON      = JSON.stringify(WORKS)
-  const categoriesJSON = JSON.stringify(CATEGORIES)
+  const worksJSON = JSON.stringify(WORKS)
 
   // ── カルーセルカードHTML ──
   function renderCards(works: typeof WORKS): string {
@@ -509,14 +502,6 @@ app.get('/', (c) => {
         </p>
       </div>
 
-      <!-- ── カテゴリフィルタ ── -->
-      <div class="works-filter" id="worksFilter">
-        <button class="works-filter-btn active" data-category="all" data-slug="all">すべて</button>
-        ${CATEGORIES.map(cat =>
-          `<button class="works-filter-btn" data-category="${cat.id}" data-slug="${cat.slug}">${cat.name}</button>`
-        ).join('')}
-      </div>
-
       <!-- カルーセルラッパー -->
       <div class="works-carousel-wrap" id="worksCarouselWrap">
         <div class="works-carousel-viewport" id="worksViewport">
@@ -594,8 +579,7 @@ app.get('/', (c) => {
 
   <script>
     // SSR済みデータをクライアントへ渡す
-    window.__WORKS__      = ${worksJSON};
-    window.__CATEGORIES__ = ${categoriesJSON};
+    window.__WORKS__ = ${worksJSON};
   </script>
   <script src="/static/app.js"></script>
 </body>

@@ -135,12 +135,11 @@
   }, { passive: true });
 
   // ================================================================
-  //  WORKS: カテゴリフィルタ + カルーセル
+  //  WORKS: カルーセル
   // ================================================================
   (function initWorks() {
 
     // ── DOM refs ──
-    const filterWrap   = document.getElementById('worksFilter');
     const track        = document.getElementById('worksTrack');
     const viewport     = document.getElementById('worksViewport');
     const dotsWrap     = document.getElementById('worksDots');
@@ -168,10 +167,9 @@
     });
 
     // 状態
-    let allWorks       = window.__WORKS__      || [];  // 全件キャッシュ（フィルタ前）
-    let currentWorks   = allWorks.slice();              // 現在表示中
+    let allWorks       = window.__WORKS__ || [];
+    let currentWorks   = allWorks.slice();
     let currentIndex   = 0;
-    let activeCategory = 'all';
 
     // ── カードHTML生成 ──
     function buildCardHTML(item, idx) {
@@ -378,37 +376,6 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => slideTo(currentIndex, false), 100);
     });
-
-    // ── カテゴリフィルタ ──
-    // フィルタボタン押下時の処理（ローカルデータをカテゴリスラッグで絞り込み）
-    function filterBySlug(categoryId, slug) {
-      activeCategory = categoryId;
-
-      // ボタンのactive状態を更新
-      if (filterWrap) {
-        filterWrap.querySelectorAll('.works-filter-btn').forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('data-category') === categoryId);
-        });
-      }
-
-      const filtered = slug === 'all'
-        ? allWorks
-        : allWorks.filter(item => (item.categorySlugs || []).includes(slug));
-
-      renderCarousel(filtered);
-    }
-
-    // フィルタボタンにイベントをバインド
-    if (filterWrap) {
-      filterWrap.querySelectorAll('.works-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const categoryId = btn.getAttribute('data-category') || 'all';
-          const slug       = btn.getAttribute('data-slug')     || 'all';
-          if (categoryId === activeCategory) return; // 同じカテゴリは無視
-          filterBySlug(categoryId, slug);
-        });
-      });
-    }
 
     // ── 初期描画 ──
     // SSRで埋め込まれたデータをそのまま表示
