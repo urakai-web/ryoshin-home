@@ -379,7 +379,7 @@ app.get('/', (c) => {
           <span class="section-title-en">SERVICE</span>
           <span class="section-title-jp">事業内容</span>
         </h2>
-        <p class="section-desc">省エネ設備・住宅リフォーム・空き家対策。3つの事業を軸に、<br>暮らしにまつわるお困りごとをワンストップでサポートします。</p>
+        <p class="section-desc">省エネ設備・住宅リフォーム・空き家対策。<br>3つの事業を軸に、暮らしにまつわるお困りごとをワンストップでサポートします。</p>
       </div>
 
       <div class="service-grid">
