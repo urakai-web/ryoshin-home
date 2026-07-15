@@ -189,9 +189,6 @@
             </div>` : ''}
           </div>
           <div class="work-card-body">
-            <div class="work-card-meta">
-              <span class="work-card-area"><i class="pin-icon"></i>${escHtml(item.area)}</span>
-            </div>
             <h3 class="work-card-title">${escHtml(item.title)}</h3>
             <p class="work-card-desc">${escHtml(item.description)}</p>
             <div class="work-card-footer">
@@ -319,24 +316,46 @@
 
     // ── タッチ / マウスドラッグ ──
     let pointerStartX   = 0;
+    let pointerStartY   = 0;
     let pointerCurrentX = 0;
     let isDragging      = false;
+    let dragAxis        = null; // 'x' | 'y' | null（判定前）
     let dragCardStep    = 0;
     let dragBaseOffset  = 0;
     let dragRAF         = null;
     const DRAG_THRESHOLD = 40;
+    const AXIS_LOCK_PX   = 6; // この移動量で横/縦ドラッグかを確定する
 
-    function onDragStart(x) {
+    function onDragStart(x, y) {
       isDragging      = true;
+      dragAxis        = null;
       pointerStartX   = x;
+      pointerStartY   = y;
       pointerCurrentX = x;
       // レイアウト計算はドラッグ開始時に1回だけ行い、move中の強制リフローを防ぐ
       dragCardStep   = getCardStep();
       dragBaseOffset = currentIndex * dragCardStep;
       track.style.transition = 'none';
     }
-    function onDragMove(x) {
+    function onDragMove(x, y, evt) {
       if (!isDragging) return;
+
+      // 横/縦どちらのジェスチャーか、最初の数pxで一度だけ判定する
+      if (dragAxis === null) {
+        const dx = x - pointerStartX;
+        const dy = y - pointerStartY;
+        if (Math.abs(dx) < AXIS_LOCK_PX && Math.abs(dy) < AXIS_LOCK_PX) return;
+        dragAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (dragAxis === 'y') {
+          // 縦スワイプならページスクロールに任せてドラッグを中断
+          isDragging = false;
+          return;
+        }
+      }
+
+      // 横ドラッグ確定後は、ブラウザ側の縦スクロール判定と競合しないようにする
+      if (evt && evt.cancelable) evt.preventDefault();
+
       pointerCurrentX = x;
       if (dragRAF) return;
       dragRAF = requestAnimationFrame(() => {
@@ -363,12 +382,20 @@
       }
     }
 
-    viewport.addEventListener('touchstart',  e => onDragStart(e.touches[0].clientX), { passive: true });
-    viewport.addEventListener('touchmove',   e => onDragMove(e.touches[0].clientX),  { passive: true });
-    viewport.addEventListener('touchend',    onDragEnd);
-    viewport.addEventListener('mousedown',   e => { e.preventDefault(); onDragStart(e.clientX); });
-    document.addEventListener('mousemove',   e => { if (isDragging) onDragMove(e.clientX); });
-    document.addEventListener('mouseup',     () => { if (isDragging) onDragEnd(); });
+    viewport.addEventListener('touchstart', e => {
+      onDragStart(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: true });
+    viewport.addEventListener('touchmove', e => {
+      onDragMove(e.touches[0].clientX, e.touches[0].clientY, e);
+    }, { passive: false });
+    viewport.addEventListener('touchend', onDragEnd);
+    viewport.addEventListener('mousedown', e => {
+      e.preventDefault();
+      onDragStart(e.clientX, e.clientY);
+      dragAxis = 'x'; // マウスドラッグは常に横方向として扱う
+    });
+    document.addEventListener('mousemove', e => { if (isDragging) onDragMove(e.clientX, e.clientY); });
+    document.addEventListener('mouseup',   () => { if (isDragging) onDragEnd(); });
 
     // リサイズ
     let resizeTimer;

@@ -1039,33 +1039,6 @@ section {
   padding: 28px 28px 24px;
 }
 
-.work-card-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.work-card-area {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--card-text-muted);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.pin-icon::before {
-  content: '📍';
-  font-size: 0.6rem;
-}
-
-.work-card-date {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--card-text-muted);
-}
-
 .work-card-title {
   font-family: var(--font-jp);
   font-size: 1.1rem;

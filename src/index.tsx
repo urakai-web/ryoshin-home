@@ -307,9 +307,6 @@ app.get('/', (c) => {
         </div>` : ''}
       </div>
       <div class="work-card-body">
-        <div class="work-card-meta">
-          <span class="work-card-area"><i class="pin-icon"></i>${item.area}</span>
-        </div>
         <h3 class="work-card-title">${item.title}</h3>
         <p class="work-card-desc">${item.description}</p>
         <div class="work-card-footer">
