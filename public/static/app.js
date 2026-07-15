@@ -329,7 +329,6 @@
       mouseMoved       = false;
       mouseDownX       = e.clientX;
       mouseScrollStart = viewport.scrollLeft;
-      viewport.style.scrollSnapType = 'none';
     });
     document.addEventListener('mousemove', e => {
       if (!isMouseDragging) return;
@@ -340,11 +339,6 @@
     document.addEventListener('mouseup', () => {
       if (!isMouseDragging) return;
       isMouseDragging = false;
-      viewport.style.scrollSnapType = '';
-      if (mouseMoved) {
-        const step = getCardStep();
-        scrollToIndex(Math.round(viewport.scrollLeft / step));
-      }
     });
     // ドラッグ後に画像等がクリックとして誤発火しないようにする
     viewport.addEventListener('click', e => {
@@ -354,7 +348,6 @@
     window.addEventListener('blur', () => {
       if (!isMouseDragging) return;
       isMouseDragging = false;
-      viewport.style.scrollSnapType = '';
     });
 
     // リサイズ
