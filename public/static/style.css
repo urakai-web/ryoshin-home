@@ -959,7 +959,6 @@ section {
 .work-card {
   flex: 0 0 calc(50% - 14px);
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   background: var(--bg-card);
   border: 1px solid var(--card-border);
   overflow: hidden;
