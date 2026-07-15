@@ -94,8 +94,8 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: '本体交換・配管工事',
     description: '戸建て住宅の給湯設備を一新。日々のお湯の使用をより快適・経済的にします。',
-    image: '/static/images/works/ecocute4-after.jpg',
-    beforeImage: '/static/images/works/ecocute4-before.jpg',
+    image: '/static/images/works/ecocute4-before.jpg',
+    beforeImage: '/static/images/works/ecocute4-after.jpg',
   },
   {
     title: 'セントラル浄水器設置工事',

@@ -961,16 +961,15 @@ section {
   background: var(--bg-card);
   border: 1px solid var(--card-border);
   overflow: hidden;
-  transition: border-color 0.4s, transform 0.4s var(--ease-out-expo), opacity 0.5s;
-  opacity: 0.45;
-  transform: scale(0.97);
+  transition: border-color 0.4s;
+  opacity: 1;
+  transform: scale(1);
   min-width: 0;
 }
 
 .work-card.active-card {
   opacity: 1;
   transform: scale(1);
-  border-color: var(--blue);
 }
 
 .work-card:hover {
