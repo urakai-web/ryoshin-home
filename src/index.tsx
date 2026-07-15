@@ -193,7 +193,7 @@ function renderFooter(): string {
         <p class="footer-tel">TEL: 0120-60-4337</p>
       </div>
       <div class="footer-copy">
-        <span>&copy; 2026 株式会社 RYOSHIN. All Rights Reserved.</span>
+        <span>&copy; 株式会社 RYOSHIN. All Rights Reserved.</span>
       </div>
     </div>
   </footer>`
@@ -460,7 +460,7 @@ app.get('/', (c) => {
           <span class="section-title-en">CONTACT</span>
           <span class="section-title-jp">お問い合わせ</span>
         </h2>
-        <p class="section-desc">太陽光発電・蓄電池・リフォームなど、住まいに関するご相談・お見積もりは無料です。<br>お気軽にお電話ください。</p>
+        <p class="section-desc">太陽光発電・蓄電池・リフォームなど、住まいに関するご相談・お見積もりは無料です。<br>お電話・メール・LINEでお気軽にお問い合わせください。</p>
       </div>
       <div class="contact-content">
         <div class="contact-info">
@@ -470,14 +470,28 @@ app.get('/', (c) => {
             <span class="contact-info-note">通話無料</span>
           </div>
           <div class="contact-info-item">
+            <span class="contact-info-label">EMAIL</span>
+            <a href="mailto:ryoshin.co.ltd@gmail.com" class="contact-info-value">ryoshin.co.ltd@gmail.com</a>
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-label">LINE</span>
+            <a href="https://lin.ee/RpDV9le" target="_blank" rel="noopener noreferrer" class="contact-info-value">公式LINEはこちら</a>
+          </div>
+          <div class="contact-info-item">
             <span class="contact-info-label">ADDRESS</span>
             <span class="contact-info-value">〒572-0022 大阪府寝屋川市緑町12番13号サンハイツ302</span>
           </div>
         </div>
-        <a href="tel:0120604337" class="contact-btn">
-          <span class="contact-btn-text">電話で無料相談・お見積もり</span>
-          <span class="contact-btn-arrow">&rarr;</span>
-        </a>
+        <div class="contact-btns">
+          <a href="tel:0120604337" class="contact-btn">
+            <span class="contact-btn-text">電話で無料相談・お見積もり</span>
+            <span class="contact-btn-arrow">&rarr;</span>
+          </a>
+          <a href="https://lin.ee/RpDV9le" target="_blank" rel="noopener noreferrer" class="contact-btn contact-btn-line">
+            <span class="contact-btn-text">LINEで無料相談・お見積もり</span>
+            <span class="contact-btn-arrow">&rarr;</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
