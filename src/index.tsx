@@ -6,9 +6,8 @@ const SITE_URL = 'https://ryoshin-home.com'
 
 // ================================================================
 //  施工事例データ（静的）
-//  ※ 太陽光発電・エコキュートは実際の施工写真、それ以外は準備中のため
-//    プレースホルダー画像です。実際の施工写真が届き次第、
-//    /public/static/images/works/ 配下の画像を差し替えてください。
+//  すべて実際の施工写真。beforeImage が設定されている項目は
+//  WORKSカードにBefore/Afterトグルボタンが表示される。
 // ================================================================
 const CATEGORIES = [
   { id: 'energy', name: '省エネ設備事業', slug: 'energy' },
@@ -18,33 +17,91 @@ const CATEGORIES = [
 
 const WORKS = [
   {
-    title: '太陽光発電システム設置工事',
+    title: '太陽光発電システム設置工事①',
     categoryLabel: '省エネ設備事業',
     categorySlugs: ['energy'],
     area: '対応エリア: 大阪府全域',
     content: 'パネル・パワーコンディショナ設置',
     description: '屋根の状況に合わせた最適なパネル配置で、電気代削減と売電収入をサポートします。',
-    image: '/static/images/works/solar.jpg',
-    beforeImage: '/static/images/works/solar-before.jpg',
+    image: '/static/images/works/solar1-after.jpg',
+    beforeImage: '/static/images/works/solar1-before.jpg',
   },
   {
-    title: '蓄電池システム導入工事',
+    title: '太陽光発電システム設置工事②',
     categoryLabel: '省エネ設備事業',
     categorySlugs: ['energy'],
     area: '対応エリア: 大阪府全域',
-    content: '蓄電池本体・システム連携設置',
-    description: '太陽光との連携で、停電時にも安心な自家発電・自家消費の仕組みを構築します。',
-    image: '/static/images/works/battery.jpg',
+    content: '専用架台・パネル設置',
+    description: '既存の屋根形状に合わせた架台施工から丁寧に対応し、長期間安心してご使用いただけるよう設置します。',
+    image: '/static/images/works/solar2-after.jpg',
+    beforeImage: '/static/images/works/solar2-before.jpg',
   },
   {
-    title: 'エコキュート設置・交換工事',
+    title: 'パワーコンディショナー設置工事',
+    categoryLabel: '省エネ設備事業',
+    categorySlugs: ['energy'],
+    area: '対応エリア: 大阪府全域',
+    content: '蓄電池用パワーコンディショナ設置',
+    description: '蓄電池システムの心臓部となるパワーコンディショナを、住宅の外壁に安全・確実に設置します。',
+    image: '/static/images/works/power-conditioner.jpg',
+  },
+  {
+    title: '蓄電池システム導入工事①',
+    categoryLabel: '省エネ設備事業',
+    categorySlugs: ['energy'],
+    area: '対応エリア: 大阪府全域',
+    content: '蓄電池本体設置',
+    description: '太陽光でつくった電気を蓄え、停電時にも安心な暮らしを支える蓄電池を設置しました。',
+    image: '/static/images/works/battery1.jpg',
+  },
+  {
+    title: '蓄電池システム導入工事②',
+    categoryLabel: '省エネ設備事業',
+    categorySlugs: ['energy'],
+    area: '対応エリア: 大阪府全域',
+    content: '蓄電池本体設置',
+    description: 'コンパクトなボディでスペースを取らず、日々の電気代削減と災害時のバックアップに貢献します。',
+    image: '/static/images/works/battery2.jpg',
+  },
+  {
+    title: 'エコキュート設置・交換工事①',
     categoryLabel: '省エネ設備事業',
     categorySlugs: ['energy'],
     area: '対応エリア: 大阪府全域',
     content: '本体交換・配管工事',
-    description: '省エネ給湯への切り替えで、光熱費を抑えながら快適な暮らしを実現します。',
-    image: '/static/images/works/ecocute.jpg',
-    beforeImage: '/static/images/works/ecocute-before.jpg',
+    description: '古くなった給湯器から省エネなエコキュートへ。設置後は光熱費の削減にもつながります。',
+    image: '/static/images/works/ecocute1-after.jpg',
+    beforeImage: '/static/images/works/ecocute1-before.jpg',
+  },
+  {
+    title: 'エコキュート設置・交換工事②',
+    categoryLabel: '省エネ設備事業',
+    categorySlugs: ['energy'],
+    area: '対応エリア: 大阪府全域',
+    content: '本体交換・配管工事',
+    description: '限られた設置スペースでも、配管まで含めて丁寧に施工しました。',
+    image: '/static/images/works/ecocute2-after.jpg',
+    beforeImage: '/static/images/works/ecocute2-before.jpg',
+  },
+  {
+    title: 'エコキュート設置・交換工事③',
+    categoryLabel: '省エネ設備事業',
+    categorySlugs: ['energy'],
+    area: '対応エリア: 大阪府全域',
+    content: '本体交換・配管工事',
+    description: '新築・既存住宅を問わず、既存設備の状況に合わせた最適なプランをご提案します。',
+    image: '/static/images/works/ecocute3-after.jpg',
+    beforeImage: '/static/images/works/ecocute3-before.jpg',
+  },
+  {
+    title: 'エコキュート設置・交換工事④',
+    categoryLabel: '省エネ設備事業',
+    categorySlugs: ['energy'],
+    area: '対応エリア: 大阪府全域',
+    content: '本体交換・配管工事',
+    description: '戸建て住宅の給湯設備を一新。日々のお湯の使用をより快適・経済的にします。',
+    image: '/static/images/works/ecocute4-after.jpg',
+    beforeImage: '/static/images/works/ecocute4-before.jpg',
   },
   {
     title: 'セントラル浄水器設置工事',
@@ -56,13 +113,43 @@ const WORKS = [
     image: '/static/images/works/purifier.jpg',
   },
   {
-    title: '外壁塗装・屋根リフォーム工事',
+    title: '外壁塗装工事',
     categoryLabel: 'リフォーム事業',
     categorySlugs: ['reform'],
     area: '対応エリア: 大阪府全域',
-    content: '外壁塗装・屋根工事',
-    description: '建物を守り、美観を保つ塗装工事。水回り・内装・外構工事にも幅広く対応します。',
-    image: '/static/images/works/reform.jpg',
+    content: '高圧洗浄・外壁塗装',
+    description: '高圧洗浄で汚れを落としてから、耐久性の高い塗料でしっかり塗装。建物を長く美しく守ります。',
+    image: '/static/images/works/reform-wall-after.jpg',
+    beforeImage: '/static/images/works/reform-wall-before.jpg',
+  },
+  {
+    title: '基礎シーラー塗装工事',
+    categoryLabel: 'リフォーム事業',
+    categorySlugs: ['reform'],
+    area: '対応エリア: 大阪府全域',
+    content: '基礎部分のシーラー塗装',
+    description: '外壁塗装の下地となる基礎部分にシーラーを施工。塗料の密着性を高め、仕上がりの耐久性を向上させます。',
+    image: '/static/images/works/reform-sealer-after.jpg',
+    beforeImage: '/static/images/works/reform-sealer-before.jpg',
+  },
+  {
+    title: '軒天塗装工事',
+    categoryLabel: 'リフォーム事業',
+    categorySlugs: ['reform'],
+    area: '対応エリア: 大阪府全域',
+    content: '軒天部分の上塗り',
+    description: '見落とされがちな軒天も丁寧に塗装。建物全体の美観と劣化防止を両立します。',
+    image: '/static/images/works/reform-eaves-after.jpg',
+    beforeImage: '/static/images/works/reform-eaves-before.jpg',
+  },
+  {
+    title: 'カーポート設置工事',
+    categoryLabel: 'リフォーム事業',
+    categorySlugs: ['reform'],
+    area: '対応エリア: 大阪府全域',
+    content: 'カーポート新設工事',
+    description: '雨や紫外線から車を守るカーポートを新設。駐車スペースの快適性もアップします。',
+    image: '/static/images/works/carport.jpg',
   },
   {
     title: '空き家管理・利活用サポート',
@@ -417,8 +504,8 @@ app.get('/', (c) => {
           <span class="section-title-en">WORKS</span>
           <span class="section-title-jp">施工事例</span>
         </h2>
-        <p class="section-desc">太陽光発電から住宅リフォームまで、対応可能な工事内容の一部をご紹介します。<br>
-          <span class="works-note">※ 一部の写真は準備中のイメージです。実際の施工写真が届き次第、順次更新いたします。</span>
+        <p class="section-desc">太陽光発電から住宅リフォームまで、実際の施工事例をご紹介します。<br>
+          <span class="works-note">Before/Afterボタンがある事例は、施工前後の写真を切り替えてご覧いただけます。</span>
         </p>
       </div>
 

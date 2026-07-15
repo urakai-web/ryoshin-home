@@ -9,3 +9,7 @@ pids/
 
 # 生の動画素材（100MB超のためGitHubにpush不可。書き出し済みのpublic/static/video/hero.mp4のみコミットする）
 画像素材/*.mov
+
+# 実在のお客様名が写り込んだ元写真（リポジトリは公開のため、クロップ済みのpublic/static/images配下のみコミットする）
+画像素材/施工事例/シーラー塗装before.JPG
+画像素材/施工事例/シーラー塗装after.JPG
