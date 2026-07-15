@@ -972,6 +972,7 @@ section {
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
+  touch-action: pan-y;
 }
 
 .works-carousel-viewport:active {

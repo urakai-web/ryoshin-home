@@ -323,23 +323,37 @@
     let pointerStartX   = 0;
     let pointerCurrentX = 0;
     let isDragging      = false;
+    let dragCardStep    = 0;
+    let dragBaseOffset  = 0;
+    let dragRAF         = null;
     const DRAG_THRESHOLD = 40;
 
     function onDragStart(x) {
       isDragging      = true;
       pointerStartX   = x;
       pointerCurrentX = x;
+      // レイアウト計算はドラッグ開始時に1回だけ行い、move中の強制リフローを防ぐ
+      dragCardStep   = getCardStep();
+      dragBaseOffset = currentIndex * dragCardStep;
       track.style.transition = 'none';
     }
     function onDragMove(x) {
       if (!isDragging) return;
       pointerCurrentX = x;
-      const diff = pointerCurrentX - pointerStartX;
-      track.style.transform = `translateX(${-(currentIndex * getCardStep() - diff)}px)`;
+      if (dragRAF) return;
+      dragRAF = requestAnimationFrame(() => {
+        dragRAF = null;
+        const diff = pointerCurrentX - pointerStartX;
+        track.style.transform = `translateX(${-(dragBaseOffset - diff)}px)`;
+      });
     }
     function onDragEnd() {
       if (!isDragging) return;
       isDragging = false;
+      if (dragRAF) {
+        cancelAnimationFrame(dragRAF);
+        dragRAF = null;
+      }
       const diff = pointerCurrentX - pointerStartX;
       const total = track.querySelectorAll('.work-card').length;
       if (diff < -DRAG_THRESHOLD && currentIndex < total - 1) {
