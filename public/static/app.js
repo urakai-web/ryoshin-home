@@ -288,7 +288,6 @@
         const total = track.querySelectorAll('.work-card').length;
         const idx = Math.round(viewport.scrollLeft / step);
         currentIndex = Math.max(0, Math.min(idx, total - 1));
-        updateUI();
       });
     }, { passive: true });
 
