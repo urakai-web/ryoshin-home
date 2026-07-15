@@ -931,7 +931,7 @@ section {
 .works-carousel-viewport {
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   cursor: grab;
