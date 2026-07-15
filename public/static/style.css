@@ -978,7 +978,6 @@ section {
 .work-card-img-wrap {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
   background: var(--bg-dark);
   display: flex;
   align-items: center;

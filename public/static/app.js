@@ -220,6 +220,23 @@
         track.innerHTML = buildEmptyHTML();
       } else {
         track.innerHTML = works.map((item, i) => buildCardHTML(item, i)).join('');
+        // 画像の読み込み後にコンテナのサイズを調整
+        track.querySelectorAll('.work-card-img').forEach(img => {
+          img.addEventListener('load', () => {
+            const wrap = img.closest('.work-card-img-wrap');
+            if (wrap) {
+              const aspectRatio = img.naturalWidth / img.naturalHeight;
+              wrap.style.aspectRatio = aspectRatio;
+            }
+          });
+          if (img.complete) {
+            const wrap = img.closest('.work-card-img-wrap');
+            if (wrap) {
+              const aspectRatio = img.naturalWidth / img.naturalHeight;
+              wrap.style.aspectRatio = aspectRatio;
+            }
+          }
+        });
       }
       viewport.scrollLeft = 0;
 
