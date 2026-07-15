@@ -16,6 +16,15 @@
 - **スクロールアニメーション**: IntersectionObserver によるフェードイン
 - **固定ヘッダー**: スクロール時にバックドロップブラー付きで表示
 
+## 画像の軽量化について
+初期状態では画像合計8.4MB（特にロゴが999KB）と重かったため、以下を実施済み：
+- ロゴ画像: 1404px→600px にリサイズ + PNG圧縮強化で999KB→231KBに削減
+- WORKS/PHILOSOPHYの実写真: 幅1400px→1100px程度に縮小 + JPEG圧縮強化（q:v 4→6）で合計7.7MB→3.8MB程度に削減
+- 現在の画像合計: 約4.0MB（`public/static/images/`）
+- WORKS/SERVICEカードの画像は基本的に `loading="lazy"` を指定済み
+
+今後さらに写真を追加する場合も、幅1100px・ffmpegの `-q:v 6` 程度を目安に圧縮してから配置してください。
+
 ## Tech Stack
 - **Backend**: Hono (TypeScript) on Cloudflare Pages
 - **Frontend**: Vanilla JS + CSS（CDN不要の軽量設計）
