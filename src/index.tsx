@@ -25,6 +25,7 @@ const WORKS = [
     content: 'パネル・パワーコンディショナ設置',
     description: '屋根の状況に合わせた最適なパネル配置で、電気代削減と売電収入をサポートします。',
     image: '/static/images/works/solar.jpg',
+    beforeImage: '/static/images/works/solar-before.jpg',
   },
   {
     title: '蓄電池システム導入工事',
@@ -43,6 +44,7 @@ const WORKS = [
     content: '本体交換・配管工事',
     description: '省エネ給湯への切り替えで、光熱費を抑えながら快適な暮らしを実現します。',
     image: '/static/images/works/ecocute.jpg',
+    beforeImage: '/static/images/works/ecocute-before.jpg',
   },
   {
     title: 'セントラル浄水器設置工事',
@@ -214,10 +216,15 @@ app.get('/', (c) => {
     return works.map((item, i) => `
     <article class="work-card${i === 0 ? ' active-card' : ''}" data-index="${String(i + 1).padStart(2, '0')}">
       <div class="work-card-img-wrap">
-        <img src="${item.image}" alt="${item.title}" class="work-card-img" loading="lazy">
+        <img src="${item.image}" alt="${item.title}" class="work-card-img" loading="lazy" data-after-src="${item.image}" data-before-src="${(item as any).beforeImage || ''}">
         <div class="work-card-overlay">
           <span class="work-card-category">${item.categoryLabel}</span>
         </div>
+        ${(item as any).beforeImage ? `
+        <div class="work-card-ba-toggle">
+          <button type="button" class="ba-btn active" data-state="after">After</button>
+          <button type="button" class="ba-btn" data-state="before">Before</button>
+        </div>` : ''}
       </div>
       <div class="work-card-body">
         <div class="work-card-meta">

@@ -1047,6 +1047,32 @@ section {
   border: 1px solid rgba(42, 111, 219, 0.4);
 }
 
+.work-card-ba-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.ba-btn {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 4px 10px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.ba-btn.active {
+  background: #ffffff;
+  color: var(--text-primary);
+}
+
 .work-card-body {
   padding: 28px 28px 24px;
 }

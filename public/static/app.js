@@ -151,6 +151,22 @@
 
     if (!track || !viewport) return;
 
+    // ── Before/After トグル ──
+    track.addEventListener('click', e => {
+      const btn = e.target.closest('.ba-btn');
+      if (!btn) return;
+      const wrap = btn.closest('.work-card-img-wrap');
+      const img  = wrap && wrap.querySelector('.work-card-img');
+      if (!img) return;
+
+      const state = btn.getAttribute('data-state');
+      const src   = state === 'before' ? img.getAttribute('data-before-src') : img.getAttribute('data-after-src');
+      if (!src) return;
+
+      img.src = src;
+      wrap.querySelectorAll('.ba-btn').forEach(b => b.classList.toggle('active', b === btn));
+    });
+
     // 状態
     let allWorks       = window.__WORKS__      || [];  // 全件キャッシュ（フィルタ前）
     let currentWorks   = allWorks.slice();              // 現在表示中
@@ -160,13 +176,19 @@
     // ── カードHTML生成 ──
     function buildCardHTML(item, idx) {
       const label = item.categoryLabel || '';
+      const hasBeforeAfter = !!item.beforeImage;
       return `
         <article class="work-card${idx === 0 ? ' active-card' : ''}" data-index="${String(idx + 1).padStart(2, '0')}">
           <div class="work-card-img-wrap">
-            <img src="${item.image}" alt="${escHtml(item.title)}" class="work-card-img" loading="lazy">
+            <img src="${item.image}" alt="${escHtml(item.title)}" class="work-card-img" loading="lazy" data-after-src="${escHtml(item.image)}" data-before-src="${escHtml(item.beforeImage || '')}">
             <div class="work-card-overlay">
               <span class="work-card-category">${escHtml(label)}</span>
             </div>
+            ${hasBeforeAfter ? `
+            <div class="work-card-ba-toggle">
+              <button type="button" class="ba-btn active" data-state="after">After</button>
+              <button type="button" class="ba-btn" data-state="before">Before</button>
+            </div>` : ''}
           </div>
           <div class="work-card-body">
             <div class="work-card-meta">
