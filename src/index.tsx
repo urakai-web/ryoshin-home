@@ -145,15 +145,6 @@ const WORKS = [
     description: '雨や紫外線から車を守るカーポートを新設。駐車スペースの快適性もアップします。',
     image: '/static/images/works/carport.jpg',
   },
-  {
-    title: '空き家管理・利活用サポート',
-    categoryLabel: '空き家事業',
-    categorySlugs: ['vacant'],
-    area: '対応エリア: 大阪府全域',
-    content: '定期点検・清掃・利活用提案',
-    description: '空き家の劣化防止から賃貸・売却提案まで、資産価値を守る管理をサポートします。',
-    image: '/static/images/works/vacant.jpg',
-  },
 ]
 
 // ================================================================

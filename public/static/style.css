@@ -961,7 +961,6 @@ section {
   background: var(--bg-card);
   border: 1px solid var(--card-border);
   overflow: hidden;
-  transition: border-color 0.4s;
   opacity: 1;
   transform: scale(1);
   min-width: 0;
@@ -1166,7 +1165,7 @@ section {
 
 @keyframes cardsSlideIn {
   from { opacity: 0; transform: translateX(40px) scale(0.96); }
-  to   { opacity: 0.45; transform: translateX(0) scale(0.97); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 .works-carousel-wrap.animate-in .work-card.active-card {
