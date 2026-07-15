@@ -990,6 +990,7 @@ section {
   object-fit: contain;
   object-position: center;
   filter: brightness(1);
+  max-height: 600px;
 }
 
 .work-card.active-card .work-card-img,
