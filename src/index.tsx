@@ -143,7 +143,7 @@ const WORKS = [
     area: '対応エリア: 大阪府全域',
     content: 'カーポート新設工事',
     description: '雨や紫外線から車を守るカーポートを新設。駐車スペースの快適性もアップします。',
-    image: '/static/images/works/carport-after.jpg',
+    image: '/static/images/works/carport-after.png',
     beforeImage: '/static/images/works/carport.jpg',
   },
 ]
