@@ -927,13 +927,22 @@ section {
   z-index: 1;
 }
 
-/* カルーセルのオーバーフロー制御コンテナ */
+/* カルーセルのオーバーフロー制御コンテナ（ネイティブスクロール + scroll-snap） */
 .works-carousel-viewport {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-y;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.works-carousel-viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .works-carousel-viewport:active {
@@ -944,13 +953,13 @@ section {
 .works-carousel-track {
   display: flex;
   gap: 28px;
-  transition: transform 0.5s var(--ease-out-expo);
-  will-change: transform;
 }
 
 /* カード個別スタイル */
 .work-card {
   flex: 0 0 calc(50% - 14px);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   background: var(--bg-card);
   border: 1px solid var(--card-border);
   overflow: hidden;

@@ -221,8 +221,7 @@
       } else {
         track.innerHTML = works.map((item, i) => buildCardHTML(item, i)).join('');
       }
-      track.style.transition = 'none';
-      track.style.transform  = 'translateX(0)';
+      viewport.scrollLeft = 0;
 
       // dots再描画
       if (dotsWrap) {
@@ -232,12 +231,7 @@
         bindDots();
       }
 
-      // カウンター更新
-      updateCounter();
-
-      // ボタン状態
-      if (prevBtn) prevBtn.disabled = true;
-      if (nextBtn) nextBtn.disabled = works.length <= 1;
+      updateUI();
 
       // IntersectionObserver 再登録
       const wrap = document.getElementById('worksCarouselWrap');
@@ -246,14 +240,7 @@
       }
     }
 
-    // ── カウンター & ボタン更新 ──
-    function updateCounter() {
-      const total = currentWorks.length;
-      if (currentEl) currentEl.textContent = total > 0 ? String(currentIndex + 1).padStart(2, '0') : '--';
-      if (totalEl)   totalEl.textContent   = String(total).padStart(2, '0');
-    }
-
-    // ── カードの幅 + gap ──
+    // ── カードの幅 + gap（ネイティブスクロールの1コマ分の移動量） ──
     function getCardStep() {
       const cards = Array.from(track.querySelectorAll('.work-card'));
       if (cards.length === 0) return 0;
@@ -262,19 +249,10 @@
       return cardW + gap;
     }
 
-    // ── スライド ──
-    function slideTo(index, animate) {
+    // ── 現在位置からカウンター・ドット・ボタン状態を更新 ──
+    function updateUI() {
       const cards = Array.from(track.querySelectorAll('.work-card'));
       const total = cards.length;
-      if (total === 0) return;
-
-      currentIndex = Math.max(0, Math.min(index, total - 1));
-
-      const offset = currentIndex * getCardStep();
-      track.style.transition = animate === false
-        ? 'none'
-        : 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-      track.style.transform = `translateX(-${offset}px)`;
 
       cards.forEach((card, i) => card.classList.toggle('active-card', i === currentIndex));
 
@@ -284,10 +262,35 @@
         });
       }
 
-      updateCounter();
+      if (currentEl) currentEl.textContent = total > 0 ? String(currentIndex + 1).padStart(2, '0') : '--';
+      if (totalEl)   totalEl.textContent   = String(total).padStart(2, '0');
       if (prevBtn) prevBtn.disabled = currentIndex === 0;
-      if (nextBtn) nextBtn.disabled = currentIndex === total - 1;
+      if (nextBtn) nextBtn.disabled = currentIndex >= total - 1;
     }
+
+    // ── 指定インデックスへネイティブスクロールで移動 ──
+    function scrollToIndex(index, smooth) {
+      const total = track.querySelectorAll('.work-card').length;
+      if (total === 0) return;
+      currentIndex = Math.max(0, Math.min(index, total - 1));
+      viewport.scrollTo({ left: currentIndex * getCardStep(), behavior: smooth === false ? 'auto' : 'smooth' });
+      updateUI();
+    }
+
+    // ── ネイティブスクロールに合わせて現在位置を追従（スワイプ・トラックパッド・慣性スクロール全て対応） ──
+    let scrollRAF = null;
+    viewport.addEventListener('scroll', () => {
+      if (scrollRAF) return;
+      scrollRAF = requestAnimationFrame(() => {
+        scrollRAF = null;
+        const step = getCardStep();
+        if (step <= 0) return;
+        const total = track.querySelectorAll('.work-card').length;
+        const idx = Math.round(viewport.scrollLeft / step);
+        currentIndex = Math.max(0, Math.min(idx, total - 1));
+        updateUI();
+      });
+    }, { passive: true });
 
     // ── ドットのイベント ──
     function bindDots() {
@@ -295,14 +298,14 @@
       dotsWrap.querySelectorAll('.works-dot').forEach(dot => {
         dot.addEventListener('click', () => {
           const idx = parseInt(dot.getAttribute('data-goto'), 10);
-          if (!isNaN(idx)) slideTo(idx);
+          if (!isNaN(idx)) scrollToIndex(idx);
         });
       });
     }
 
     // ── 前後ボタン ──
-    if (prevBtn) prevBtn.addEventListener('click', () => slideTo(currentIndex - 1));
-    if (nextBtn) nextBtn.addEventListener('click', () => slideTo(currentIndex + 1));
+    if (prevBtn) prevBtn.addEventListener('click', () => scrollToIndex(currentIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => scrollToIndex(currentIndex + 1));
 
     // ── キーボード ──
     document.addEventListener('keydown', e => {
@@ -310,98 +313,55 @@
       if (!section) return;
       const rect = section.getBoundingClientRect();
       if (rect.top > window.innerHeight || rect.bottom < 0) return;
-      if (e.key === 'ArrowLeft')  slideTo(currentIndex - 1);
-      if (e.key === 'ArrowRight') slideTo(currentIndex + 1);
+      if (e.key === 'ArrowLeft')  scrollToIndex(currentIndex - 1);
+      if (e.key === 'ArrowRight') scrollToIndex(currentIndex + 1);
     });
 
-    // ── タッチ / マウスドラッグ ──
-    let pointerStartX   = 0;
-    let pointerStartY   = 0;
-    let pointerCurrentX = 0;
-    let isDragging      = false;
-    let dragAxis        = null; // 'x' | 'y' | null（判定前）
-    let dragCardStep    = 0;
-    let dragBaseOffset  = 0;
-    let dragRAF         = null;
-    const DRAG_THRESHOLD = 40;
-    const AXIS_LOCK_PX   = 6; // この移動量で横/縦ドラッグかを確定する
+    // ── デスクトップのマウスドラッグでもスクロールできるようにする ──
+    // （タッチ操作はブラウザのネイティブスクロール + scroll-snapに完全に任せる）
+    let isMouseDragging  = false;
+    let mouseDownX       = 0;
+    let mouseScrollStart = 0;
+    let mouseMoved       = false;
 
-    function onDragStart(x, y) {
-      isDragging      = true;
-      dragAxis        = null;
-      pointerStartX   = x;
-      pointerStartY   = y;
-      pointerCurrentX = x;
-      // レイアウト計算はドラッグ開始時に1回だけ行い、move中の強制リフローを防ぐ
-      dragCardStep   = getCardStep();
-      dragBaseOffset = currentIndex * dragCardStep;
-      track.style.transition = 'none';
-    }
-    function onDragMove(x, y, evt) {
-      if (!isDragging) return;
-
-      // 横/縦どちらのジェスチャーか、最初の数pxで一度だけ判定する
-      if (dragAxis === null) {
-        const dx = x - pointerStartX;
-        const dy = y - pointerStartY;
-        if (Math.abs(dx) < AXIS_LOCK_PX && Math.abs(dy) < AXIS_LOCK_PX) return;
-        dragAxis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
-        if (dragAxis === 'y') {
-          // 縦スワイプならページスクロールに任せてドラッグを中断
-          isDragging = false;
-          return;
-        }
-      }
-
-      // 横ドラッグ確定後は、ブラウザ側の縦スクロール判定と競合しないようにする
-      if (evt && evt.cancelable) evt.preventDefault();
-
-      pointerCurrentX = x;
-      if (dragRAF) return;
-      dragRAF = requestAnimationFrame(() => {
-        dragRAF = null;
-        const diff = pointerCurrentX - pointerStartX;
-        track.style.transform = `translateX(${-(dragBaseOffset - diff)}px)`;
-      });
-    }
-    function onDragEnd() {
-      if (!isDragging) return;
-      isDragging = false;
-      if (dragRAF) {
-        cancelAnimationFrame(dragRAF);
-        dragRAF = null;
-      }
-      const diff = pointerCurrentX - pointerStartX;
-      const total = track.querySelectorAll('.work-card').length;
-      if (diff < -DRAG_THRESHOLD && currentIndex < total - 1) {
-        slideTo(currentIndex + 1);
-      } else if (diff > DRAG_THRESHOLD && currentIndex > 0) {
-        slideTo(currentIndex - 1);
-      } else {
-        slideTo(currentIndex);
-      }
-    }
-
-    viewport.addEventListener('touchstart', e => {
-      onDragStart(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-    viewport.addEventListener('touchmove', e => {
-      onDragMove(e.touches[0].clientX, e.touches[0].clientY, e);
-    }, { passive: false });
-    viewport.addEventListener('touchend', onDragEnd);
     viewport.addEventListener('mousedown', e => {
-      e.preventDefault();
-      onDragStart(e.clientX, e.clientY);
-      dragAxis = 'x'; // マウスドラッグは常に横方向として扱う
+      isMouseDragging  = true;
+      mouseMoved       = false;
+      mouseDownX       = e.clientX;
+      mouseScrollStart = viewport.scrollLeft;
+      viewport.style.scrollSnapType = 'none';
     });
-    document.addEventListener('mousemove', e => { if (isDragging) onDragMove(e.clientX, e.clientY); });
-    document.addEventListener('mouseup',   () => { if (isDragging) onDragEnd(); });
+    document.addEventListener('mousemove', e => {
+      if (!isMouseDragging) return;
+      const dx = e.clientX - mouseDownX;
+      if (Math.abs(dx) > 3) mouseMoved = true;
+      viewport.scrollLeft = mouseScrollStart - dx;
+    });
+    document.addEventListener('mouseup', () => {
+      if (!isMouseDragging) return;
+      isMouseDragging = false;
+      viewport.style.scrollSnapType = '';
+      if (mouseMoved) {
+        const step = getCardStep();
+        scrollToIndex(Math.round(viewport.scrollLeft / step));
+      }
+    });
+    // ドラッグ後に画像等がクリックとして誤発火しないようにする
+    viewport.addEventListener('click', e => {
+      if (mouseMoved) { e.stopPropagation(); e.preventDefault(); mouseMoved = false; }
+    }, true);
+    // mouseupが発火しないケース（ウィンドウ外でボタンを離す等）への保険
+    window.addEventListener('blur', () => {
+      if (!isMouseDragging) return;
+      isMouseDragging = false;
+      viewport.style.scrollSnapType = '';
+    });
 
     // リサイズ
     let resizeTimer;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => slideTo(currentIndex, false), 100);
+      resizeTimer = setTimeout(() => scrollToIndex(currentIndex, false), 100);
     });
 
     // ── 初期描画 ──
