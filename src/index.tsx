@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 
 const app = new Hono()
 
-const SITE_URL = 'https://ryoshin-home.com'
+const SITE_URL = 'https://ryoshin-co-ltd.com'
 
 // ================================================================
 //  施工事例データ（静的）
