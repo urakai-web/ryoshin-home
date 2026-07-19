@@ -178,7 +178,7 @@ function renderHead(title: string, description: string, path: string): string {
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${url}">
-  <meta property="og:image" content="${SITE_URL}/static/images/ogp-image.svg">
+  <meta property="og:image" content="${SITE_URL}/static/images/ogp-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ja_JP">
@@ -187,7 +187,7 @@ function renderHead(title: string, description: string, path: string): string {
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${title}">
   <meta name="twitter:description" content="${description}">
-  <meta name="twitter:image" content="${SITE_URL}/static/images/ogp-image.svg">
+  <meta name="twitter:image" content="${SITE_URL}/static/images/ogp-image.png">
 
   <!-- 構造化データ（JSON-LD） -->
   <script type="application/ld+json">
