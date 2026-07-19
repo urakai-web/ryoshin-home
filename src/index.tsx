@@ -158,13 +158,19 @@ function renderHead(title: string, description: string, path: string): string {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${title}</title>
   <meta name="description" content="${description}">
-  <meta name="keywords" content="RYOSHIN,太陽光発電,蓄電池,エコキュート,セントラル浄水器,住宅リフォーム,外壁塗装,空き家対策,寝屋川市">
+  <meta name="keywords" content="エコキュート,給湯器交換,太陽光発電,蓄電池,省エネリフォーム,大阪,寝屋川市,RYOSHIN,住宅リフォーム,外壁塗装,空き家対策">
   <meta name="robots" content="index, follow">
   <meta name="author" content="株式会社RYOSHIN">
 
   <!-- ファビコン -->
   <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
-  <link rel="apple-touch-icon" href="/static/images/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon-180x180.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#003366">
+  <meta name="msapplication-TileColor" content="#003366">
+  <meta name="msapplication-TileImage" content="/static/images/favicon-144x144.png">
 
   <!-- OGP（SNSシェア・検索結果プレビュー用） -->
   <meta property="og:type" content="website">
@@ -189,7 +195,7 @@ function renderHead(title: string, description: string, path: string): string {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "株式会社RYOSHIN",
-    "description": "省エネ設備、住宅リフォーム、空き家対策をワンストップで提供する総合生活サポート企業。",
+    "description": "大阪府全域でエコキュート交換・設置、太陽光発電、蓄電池、省エネリフォームなど、給湯器交換から住宅リフォーム、空き家対策までワンストップで提供する総合生活サポート企業。寝屋川市に本社。",
     "url": "${SITE_URL}",
     "logo": "${SITE_URL}/static/images/logo.png",
     "image": "${SITE_URL}/static/images/ogp-image.svg",
@@ -202,17 +208,42 @@ function renderHead(title: string, description: string, path: string): string {
       "streetAddress": "緑町12番13号サンハイツ302",
       "addressCountry": "JP"
     },
+    "areaServed": [
+      {
+        "@type": "State",
+        "name": "大阪府"
+      },
+      {
+        "@type": "City",
+        "name": "寝屋川市"
+      }
+    ],
     "serviceType": [
+      "エコキュート設置・交換工事",
+      "給湯器交換",
       "太陽光発電設置工事",
       "蓄電池設置工事",
-      "エコキュート設置",
-      "セントラル浄水器設置",
+      "省エネリフォーム",
       "住宅リフォーム",
       "外壁塗装・屋根工事",
+      "セントラル浄水器設置",
       "空き家管理・利活用サポート",
       "ガスの切り替え",
       "携帯電話プランの見直し",
       "ネット回線の見直し"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "telephone": "0120-60-4337",
+      "email": "info@ryoshin-home.com",
+      "areaServed": "JP",
+      "availableLanguage": "ja"
+    },
+    "sameAs": [
+      "https://www.facebook.com/ryoshin",
+      "https://www.instagram.com/ryoshin",
+      "https://line.me/ti/p/@ryoshin"
     ]
   }
   </script>
@@ -337,6 +368,7 @@ app.get('/', (c) => {
 
   <!-- ====== HERO / FV ====== -->
   <section id="hero" class="hero">
+    <h1 class="sr-only">株式会社RYOSHIN - エコキュート・太陽光発電・蓄電池・省エネ設備・住宅リフォーム・外壁塗装・空き家対策</h1>
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline class="hero-video" id="heroVideo">
         <source src="/static/video/hero.mp4" type="video/mp4">
@@ -347,9 +379,9 @@ app.get('/', (c) => {
       <div class="hero-grid-bg"></div>
       <div class="hero-text-wrap">
         <p class="hero-label"><span class="hero-label-line"></span>TOTAL LIFE SUPPORT</p>
-        <h1 class="hero-title">
+        <h2 class="hero-title">
           <span class="hero-title-line" data-delay="0">暮らしを豊かに。</span>
-        </h1>
+        </h2>
         <p class="hero-sub">
           省エネ設備から住宅リフォーム、空き家対策まで。<br>
           暮らしにまつわるすべてを、ワンストップでトータルサポート。
@@ -674,6 +706,33 @@ app.get('/philosophy', (c) => {
   <script src="/static/app.js"></script>
 </body>
 </html>`)
+})
+
+// ================================================================
+// sitemap.xml エンドポイント
+// ================================================================
+app.get('/sitemap.xml', (c) => {
+  const sitemapUrls = [
+    { loc: SITE_URL, lastmod: new Date().toISOString().split('T')[0], priority: '1.0' },
+    { loc: `${SITE_URL}/philosophy`, lastmod: new Date().toISOString().split('T')[0], priority: '0.8' },
+    ...WORKS.map((work, index) => ({
+      loc: `${SITE_URL}/#work-${index}`,
+      lastmod: new Date().toISOString().split('T')[0],
+      priority: '0.7'
+    }))
+  ]
+
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.map(url => `  <url>
+    <loc>${url.loc}</loc>
+    <lastmod>${url.lastmod}</lastmod>
+    <priority>${url.priority}</priority>
+  </url>`).join('\n')}
+</urlset>`
+
+  c.header('Content-Type', 'application/xml')
+  return c.text(sitemapXml)
 })
 
 export default app
